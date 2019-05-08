@@ -43,7 +43,7 @@ public class Game1 extends Application {
 		lblMissed.setLayoutY(10);
 		missed = 0;
 		
-		speed = 1;
+		speed = 50;
 		falling = 500;
 		
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
@@ -89,7 +89,7 @@ public class Game1 extends Application {
 		Circle circle = new Circle();
 		circle.setLayoutX(rand(0, 400));
 		circle.setLayoutY(1);
-		circle.setRadius(6);
+		circle.setRadius(20);
 		circle.setFill(Color.BLUE);
 		return circle;
 	}
@@ -117,7 +117,7 @@ public class Game1 extends Application {
 			((Circle) drop.get(i)).setLayoutY(((Circle) drop.get(i)).getLayoutY() + speed + ((Circle) drop.get(i)).getLayoutY() / 150 );
 			//if get droped into square
 			if((((Circle) drop.get(i)).getLayoutX() > cont.getLayoutX() && ((Circle) drop.get(i)).getLayoutX() < cont.getLayoutX() + 70) &&
-					((Circle) drop.get(i)).getLayoutY() >= 550)	{
+					((Circle) drop.get(i)).getLayoutY() > cont.getLayoutY() && ((Circle) drop.get(i)).getLayoutY() < cont.getLayoutY() + 70)	{
 				root.getChildren().remove(((Circle) drop.get(i)));
 				drop.remove(i);
 			}
