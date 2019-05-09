@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -37,13 +38,14 @@ public class Game1 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		String background ="-fx-background-image: url('file:background.png');";
+		root.setStyle(background);
 		lblMissed = new Label("Missed: 0");
 		lblMissed.setLayoutX(10);
 		lblMissed.setLayoutY(10);
 		missed = 0;
 		
-		speed = 50;
+		speed = 5;
 		falling = 500;
 		
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
