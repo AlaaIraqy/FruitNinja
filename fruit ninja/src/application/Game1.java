@@ -25,7 +25,7 @@ public class Game1 extends Application {
 	
 	AnimationTimer timer;
 	Pane root = new Pane();
-	List drop = new ArrayList();
+	List<ImageView> drop = new ArrayList<>();
 	double mouseX;
 	double mouseY;
 	
@@ -48,9 +48,12 @@ public class Game1 extends Application {
 		
 		 Image sword = new Image("sword.png");
 		 swordiv = new ImageView(sword);
+		 
 		
-		swordiv.setFitHeight(100);
-		swordiv.setFitWidth(80);
+		
+		swordiv.setFitHeight(160);
+		swordiv.setFitWidth(100);
+		
 		
 		
 		lblMissed = new Label("Missed: 0");
@@ -62,11 +65,16 @@ public class Game1 extends Application {
 		falling = 500;
 		
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
-			
+			 Image apple = new Image("apple.png");
+			 ImageView appleiv = new ImageView(apple);
+			 appleiv.setLayoutX(rand(0,1000));
+				appleiv.setLayoutY(1);
+			// appleiv.setFitHeight(150);
+			 //appleiv.setFitWidth(120);	
 			speed += falling / 3000;
-			drop.add(circle());
-			root.getChildren().add(((Node)drop.get(drop.size() -1)));
-        }));
+			drop.add(appleiv);
+			root.getChildren().add((Node) (drop.get(drop.size() -1)));
+        })); 
 		
 		timeline.setCycleCount(1000);
 		timeline.play();
@@ -102,14 +110,14 @@ public class Game1 extends Application {
 		
 	}
 	
-	public Circle circle() {
+	/*public ImageView circle() {
 		Circle circle = new Circle();
 		circle.setLayoutX(rand(0, 1000));
 		circle.setLayoutY(1);
 		circle.setRadius(20);
 		circle.setFill(Color.BLUE);
 		return circle;
-	}
+	}*/
 	
 	public Rectangle rectangle() {
 		Rectangle rectangle = new Rectangle();
@@ -131,17 +139,19 @@ public class Game1 extends Application {
 		swordiv.setLayoutY(mouseY);
 		
 		for(int i = 0; i < drop.size(); i++) {
-			((Circle) drop.get(i)).setLayoutY(((Circle) drop.get(i)).getLayoutY() + speed + ((Circle) drop.get(i)).getLayoutY() / 150 );
+			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150 );
 			//if get droped into square
-			if((((Circle) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((Circle) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
-					((Circle) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((Circle) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
-				root.getChildren().remove(((Circle) drop.get(i)));
-				drop.remove(i);
+			if((((ImageView) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((ImageView) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
+					((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
+				//root.getChildren().remove(((ImageView) drop.get(i)));
+				//drop.remove(i);
+				Image cut = new Image("apple-1.png");
+		        drop.get(i).setImage(cut); 
 			}
 				
 			//if missed remove
-			else if(((Circle) drop.get(i)).getLayoutY() >= 590) {
-				root.getChildren().remove(((Circle) drop.get(i)));
+			else if(((ImageView) drop.get(i)).getLayoutY() >= 590) {
+				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
 				missed += 1;
 				lblMissed.setText("Missed: " + String.valueOf(missed));
