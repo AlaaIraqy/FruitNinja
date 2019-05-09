@@ -7,9 +7,13 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,7 +29,7 @@ public class Game1 extends Application {
 	double mouseX;
 	double mouseY;
 	
-	Rectangle cont;
+	ImageView swordiv;
 	double speed;
 	double falling;
 	Label lblMissed;
@@ -40,12 +44,21 @@ public class Game1 extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		String background ="-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
+	
+		
+		 Image sword = new Image("sword.png");
+		 swordiv = new ImageView(sword);
+		
+		swordiv.setFitHeight(100);
+		swordiv.setFitWidth(80);
+		
+		
 		lblMissed = new Label("Missed: 0");
 		lblMissed.setLayoutX(10);
 		lblMissed.setLayoutY(10);
 		missed = 0;
 		
-		speed = 5;
+		speed = 1;
 		falling = 500;
 		
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
@@ -71,13 +84,15 @@ public class Game1 extends Application {
 		};
 		timer.start();	
 		
-		cont = rectangle();
+		//cont = swordiv;
 	
-		root.getChildren().addAll(cont, lblMissed);
+		root.getChildren().addAll( swordiv ,lblMissed);
 		
-		Scene scene = new Scene(root, 400, 600);
+		Scene scene = new Scene(root, 1000, 600);
+		scene.setCursor(Cursor.NONE);
 		
 		scene.setOnMouseMoved(e -> {
+			
 			mouseX = e.getX();
 			mouseY = e.getY();
 		});
@@ -89,7 +104,7 @@ public class Game1 extends Application {
 	
 	public Circle circle() {
 		Circle circle = new Circle();
-		circle.setLayoutX(rand(0, 400));
+		circle.setLayoutX(rand(0, 1000));
 		circle.setLayoutY(1);
 		circle.setRadius(20);
 		circle.setFill(Color.BLUE);
@@ -112,14 +127,14 @@ public class Game1 extends Application {
 	}
 	public void gameUpdate(){
 		
-		cont.setLayoutX(mouseX);
-		cont.setLayoutY(mouseY);
+		swordiv.setLayoutX(mouseX);
+		swordiv.setLayoutY(mouseY);
 		
 		for(int i = 0; i < drop.size(); i++) {
 			((Circle) drop.get(i)).setLayoutY(((Circle) drop.get(i)).getLayoutY() + speed + ((Circle) drop.get(i)).getLayoutY() / 150 );
 			//if get droped into square
-			if((((Circle) drop.get(i)).getLayoutX() > cont.getLayoutX() && ((Circle) drop.get(i)).getLayoutX() < cont.getLayoutX() + 70) &&
-					((Circle) drop.get(i)).getLayoutY() > cont.getLayoutY() && ((Circle) drop.get(i)).getLayoutY() < cont.getLayoutY() + 70)	{
+			if((((Circle) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((Circle) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
+					((Circle) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((Circle) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
 				root.getChildren().remove(((Circle) drop.get(i)));
 				drop.remove(i);
 			}
