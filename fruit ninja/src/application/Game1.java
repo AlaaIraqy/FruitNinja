@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 public class Game1 extends Application {
@@ -28,12 +29,15 @@ public class Game1 extends Application {
 	List<ImageView> drop = new ArrayList<>();
 	double mouseX;
 	double mouseY;
+	int random;
 	
 	ImageView swordiv;
 	double speed;
 	double falling;
 	Label lblMissed;
-	int missed;
+	
+	int missed=0;
+	Timeline timeline;
 
 	public static void main(String[] args) {
 		launch();
@@ -57,23 +61,36 @@ public class Game1 extends Application {
 		
 		
 		lblMissed = new Label("Missed: 0");
+		lblMissed.setFont(new Font("Arial", 40));
 		lblMissed.setLayoutX(10);
 		lblMissed.setLayoutY(10);
 		missed = 0;
 		
 		speed = 0.5;
-		falling = 500;
+		falling = 1500;
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
+		 timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
 			 Image apple = new Image("apple.png");
 			 ImageView appleiv = new ImageView(apple);
 			 appleiv.setLayoutX(rand(0,1000));
 				appleiv.setLayoutY(1);
-			// appleiv.setFitHeight(150);
+				Image peach = new Image("peach.png");
+				 ImageView peachiv = new ImageView(peach);
+				 peachiv.setLayoutX(rand(0,1000));
+					peachiv.setLayoutY(1);
+				// appleiv.setFitHeight(150);
 			 //appleiv.setFitWidth(120);	
 			speed += falling / 3000;
+			 random = rand(0,2);
+			if(random%2==0) {
 			drop.add(appleiv);
 			root.getChildren().add((Node) (drop.get(drop.size() -1)));
+			}else {
+			drop.add(peachiv);
+			root.getChildren().add((Node) (drop.get(drop.size() -1)));
+			}
+			
+			
         })); 
 		
 		timeline.setCycleCount(1000);
@@ -145,16 +162,33 @@ public class Game1 extends Application {
 					((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
 				//root.getChildren().remove(((ImageView) drop.get(i)));
 				//drop.remove(i);
-				Image cut = new Image("apple-1.png");
-		        drop.get(i).setImage(cut); 
+				Image cutapple = new Image("apple-1.png");
+				Image cutpeach = new Image("peach-1.png");
+//		       if(i%2==1) drop.get(i).setImage(cutpeach);
+//		        if(i%2==0)
+//		        drop.get(i).setImage(cut);
+				if(random%2==0) {
+				 drop.get(i).setImage(cutapple);
+					 
+				}else {
+					 drop.get(i).setImage(cutpeach);
+					 
+				}
+				
+			    missed--;
+			    System.out.println(i+"  "+missed);
+				//root.getChildren().remove(((ImageView) drop.get(i)));
+			    //drop.remove(i);
 			}
 				
 			//if missed remove
-			else if(((ImageView) drop.get(i)).getLayoutY() >= 590) {
+			else if(((ImageView) drop.get(i)).getLayoutY() >= 600) {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
-				missed += 1;
+				missed ++;
 				lblMissed.setText("Missed: " + String.valueOf(missed));
+			//	lblMissed.setStyle(Color.WHITE);
+				
 			}
 		}
 	}
