@@ -70,16 +70,17 @@ public class Game1 extends Application {
 		falling = 1500;
 		
 		 timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
-			 Image apple = new Image("apple.png");
+			 Image apple = new Image("apple-0.png");
 			 ImageView appleiv = new ImageView(apple);
 			 appleiv.setLayoutX(rand(0,1000));
 				appleiv.setLayoutY(1);
-				Image peach = new Image("peach.png");
+				Image peach = new Image("peach-0.png");
 				 ImageView peachiv = new ImageView(peach);
 				 peachiv.setLayoutX(rand(0,1000));
 					peachiv.setLayoutY(1);
 				// appleiv.setFitHeight(150);
 			 //appleiv.setFitWidth(120);	
+
 			speed += falling / 3000;
 			 random = rand(0,2);
 			if(random%2==0) {
@@ -120,6 +121,8 @@ public class Game1 extends Application {
 			
 			mouseX = e.getX();
 			mouseY = e.getY();
+			System.out.println("mousex"+mouseX);
+			System.out.println("mousey"+mouseY);
 		});
 		
 		primaryStage.setScene(scene);
@@ -177,9 +180,9 @@ public class Game1 extends Application {
 				}
 				
 			    missed--;
-			    System.out.println(i+"  "+missed);
+			   // System.out.println(i+"  "+missed);
 				//root.getChildren().remove(((ImageView) drop.get(i)));
-			    //drop.remove(i);
+                   //drop.remove(i);
 			}
 				
 			//if missed remove
@@ -191,6 +194,8 @@ public class Game1 extends Application {
 			//	lblMissed.setStyle(Color.WHITE);
 				
 			}
+			System.out.println(drop.get(i).getLayoutY());
+
 		}
 	}
 
