@@ -1,5 +1,5 @@
-package application;
-
+package View;
+import Model.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Game1 extends Application {
 	double mouseX;
 	double mouseY;
 	int random;
-	
+	int score;
 	ImageView swordiv;
 	double speed;
 	double falling;
@@ -162,6 +162,7 @@ public class Game1 extends Application {
 					((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
 				//root.getChildren().remove(((ImageView) drop.get(i)));
 				//drop.remove(i);
+			  score++;
 				Image cutapple = new Image("apple-1.png");
 				Image cutpeach = new Image("peach-1.png");
 //		       if(i%2==1) drop.get(i).setImage(cutpeach);
@@ -186,7 +187,7 @@ public class Game1 extends Application {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
 				missed ++;
-				lblMissed.setText("Missed: " + String.valueOf(missed));
+				lblMissed.setText("Missed: " + String.valueOf(score ));
 			//	lblMissed.setStyle(Color.WHITE);
 				
 			}
