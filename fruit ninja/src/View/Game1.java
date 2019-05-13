@@ -78,7 +78,7 @@ public class Game1 extends Application {
 	lblmissed.setLayoutY(10);
 		missed = 0;
 		
-		speed = 0.4;
+		speed = 0.3;
 		falling = 500;
 		
 		 timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
