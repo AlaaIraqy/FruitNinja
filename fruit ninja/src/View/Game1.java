@@ -33,11 +33,13 @@ public class Game1 extends Application {
 	double mouseX;
 	double mouseY;
 	int random;
-	int score;
+	int lives=3;
+	int score=0;
 	ImageView swordiv;
 	double speed;
 	double falling;
-	Label lblMissed;
+	Label lblscore;
+	Label lblmissed;
 	
 	int missed=0;
 	Timeline timeline;
@@ -66,10 +68,14 @@ public class Game1 extends Application {
 		
 		
 		
-		lblMissed = new Label("Missed: 0");
-		lblMissed.setFont(new Font("Arial", 40));
-		lblMissed.setLayoutX(10);
-		lblMissed.setLayoutY(10);
+		lblscore = new Label("Score: 0");
+		lblscore.setFont(new Font("Arial", 40));
+		lblscore.setLayoutX(10);
+		lblscore.setLayoutY(10);
+	lblmissed = new Label("Lives: 0");
+	lblmissed.setFont(new Font("Arial", 40));
+	lblmissed.setLayoutX(850);
+	lblmissed.setLayoutY(10);
 		missed = 0;
 		
 		speed = 0.5;
@@ -122,7 +128,7 @@ public class Game1 extends Application {
 		
 		//cont = swordiv;
 	
-		root.getChildren().addAll( swordiv ,lblMissed);
+		root.getChildren().addAll( swordiv ,lblscore,lblmissed);
 		
 		Scene scene = new Scene(root, 1000, 600);
 		scene.setCursor(Cursor.NONE);
@@ -175,7 +181,7 @@ public class Game1 extends Application {
 				//root.getChildren().remove(((ImageView) drop.get(i)));
 				//drop.remove(i);
 			  score++;
-		
+			  lblscore.setText("Score: " + String.valueOf(score ));
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
 				 drop.get(i).setImage(cutFruit);
 			    
@@ -209,8 +215,10 @@ public class Game1 extends Application {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
 				dropFruit.remove(i);
-				missed ++;
-				lblMissed.setText("Missed: " + String.valueOf(score ));
+				lives--;
+				lblmissed.setText("Lives: " + String.valueOf(lives ));
+				
+				
 			//	lblMissed.setStyle(Color.WHITE);
 				
 			}
