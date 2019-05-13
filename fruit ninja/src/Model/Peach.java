@@ -13,7 +13,7 @@ public class Peach extends Fruit {
 
 			BufferedImage img = null;
 	for(int i=0;i<3;i++) {
-			File file =  new File("C:\\Users\\PC castle\\git\\mivomikha\\fruit ninja\\src\\peach-"+i+".png");
+			File file =  new File("peach-"+i+".png");
 		try {
 		
 				img = ImageIO.read(file);

@@ -13,7 +13,7 @@ public class Basaha extends Fruit{
 
 			BufferedImage img = null;
 	for(int i=0;i<3;i++) {
-			File file =  new File("C:\\Users\\PC castle\\git\\mivomikha\\fruit ninja\\src\\basaha-"+i+".png");
+			File file =  new File("basaha-"+i+".png");
 		try {
 		
 				img = ImageIO.read(file);
