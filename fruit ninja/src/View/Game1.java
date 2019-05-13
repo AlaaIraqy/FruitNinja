@@ -78,8 +78,8 @@ public class Game1 extends Application {
 	lblmissed.setLayoutY(10);
 		missed = 0;
 		
-		speed = 0.5;
-		falling = 1000;
+		speed = 0.4;
+		falling = 500;
 		
 		 timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
 //			 Image apple = new Image("apple-0.png");
@@ -90,7 +90,7 @@ public class Game1 extends Application {
 			    dropFruit.add(fruit);
 				Image fruitimg = SwingFXUtils.toFXImage(fruit.getBufferedImages()[0], null);
 				 ImageView fruitiv = new ImageView(fruitimg);
-				 fruitiv.setLayoutX(rand(0,1000));
+				 fruitiv.setLayoutX(rand(50,900));
 					fruitiv.setLayoutY(1);
 					
 				// appleiv.setFitHeight(150);
@@ -169,10 +169,11 @@ public class Game1 extends Application {
 		return (int)(Math.random() * max + min);
 	}
 	public void gameUpdate(){
-		
+		Sword x=Sword.getInstance();
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
-		
+		x.setPositionX(mouseX);
+		x.setPositionY(mouseY);
 		for(int i = 0; i < drop.size(); i++) {
 			//if get droped into square
 			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150 );

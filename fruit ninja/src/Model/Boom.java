@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 public class Boom implements GameObject {
 
 	@Override
-	public int getXlocation() {
+	public double getXlocation() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getYlocation() {
+	public double getYlocation() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -62,6 +62,18 @@ public class Boom implements GameObject {
 	public BufferedImage[] getBufferedImages() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setXlocation(double xlocation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYlocation(double ylocation) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

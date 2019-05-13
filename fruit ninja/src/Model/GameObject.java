@@ -11,11 +11,11 @@ public interface GameObject{
 *@return X location of game object
 */
 
-public int getXlocation();
+public double getXlocation();
 /*
 *@return Y location of game object
 */
-public int getYlocation();
+public double getYlocation();
 /*
 *@return max Y location that the object can reach on the screen
 */
@@ -55,5 +55,8 @@ public void move(double time);
 sliced and one when it is not.
 */
 public BufferedImage [] getBufferedImages();
+
+public void setXlocation(double xlocation);
+public void setYlocation(double ylocation);
 
 }

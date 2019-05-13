@@ -3,8 +3,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class Fruit implements GameObject {
 
-	private int Xlocation;
-	private int Ylocation;
+	private double Xlocation;
+	private double Ylocation;
 	private int MinHeight;
 	private int InitialVelocity;
 	private int FallingVelocity;
@@ -31,13 +31,13 @@ public abstract class Fruit implements GameObject {
 //	}
 
 	@Override
-	public int getXlocation() {
+	public double getXlocation() {
 		// TODO Auto-generated method stub
 		return Xlocation;
 	}
 
 	@Override
-	public int getYlocation() {
+	public double getYlocation() {
 		// TODO Auto-generated method stub
 		return Ylocation;
 	}
@@ -92,5 +92,11 @@ public abstract class Fruit implements GameObject {
 	public BufferedImage[] getBufferedImages() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public void setXlocation(double Xlocation) {
+		this.Xlocation = Xlocation;
+	}
+	public void setYlocation(double  Ylocation) {
+		this.Ylocation = Ylocation;
 	}
 }

@@ -1,10 +1,11 @@
 package Controller;
 
+import Model.Fruit;
 import Model.GameObject;
 import Model.GameObjectFactory;
 
 public class ControllerFruit implements GameActions{
-
+   // Fruit fruit=new Fruit();
 	@Override
 	public GameObject createGameObject() {
 		GameObjectFactory factory = new GameObjectFactory();
