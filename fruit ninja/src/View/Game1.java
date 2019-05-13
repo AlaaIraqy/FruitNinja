@@ -169,9 +169,7 @@ public class Game1 extends Application {
 		
 		for(int i = 0; i < drop.size(); i++) {
 			//if get droped into square
-			
-
-			
+			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150 );
 			if((((ImageView) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((ImageView) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
 					((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
 				//root.getChildren().remove(((ImageView) drop.get(i)));
@@ -181,8 +179,7 @@ public class Game1 extends Application {
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
 				 drop.get(i).setImage(cutFruit);
 			    
-			 
-			//	 System.out.println(dropFruit.get(i));  
+			  
 			  
 			  
 			  
@@ -211,14 +208,15 @@ public class Game1 extends Application {
 			else if(((ImageView) drop.get(i)).getLayoutY() >= 600) {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
+				dropFruit.remove(i);
 				missed ++;
 				lblMissed.setText("Missed: " + String.valueOf(score ));
 			//	lblMissed.setStyle(Color.WHITE);
 				
 			}
-			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150 );
 			
-		}
+		}	
+		
 	}
 
 }
