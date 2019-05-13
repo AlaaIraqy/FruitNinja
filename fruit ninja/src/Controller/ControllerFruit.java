@@ -5,11 +5,13 @@ import Model.GameObject;
 import Model.GameObjectFactory;
 
 public class ControllerFruit implements GameActions{
-   // Fruit fruit=new Fruit();
+    GameObject fruit;
+   
 	@Override
 	public GameObject createGameObject() {
 		GameObjectFactory factory = new GameObjectFactory();
-		return factory.createFruit();
+		fruit=factory.createFruit();
+		return fruit;
 	}
 
 	@Override
@@ -19,9 +21,12 @@ public class ControllerFruit implements GameActions{
 	}
 
 	@Override
-	public void sliceObjects() {
-		// TODO Auto-generated method stub
-		
+	public boolean sliceObjects() {
+		fruit.slice(); 
+    	// System.out.println(fruit+"logic");
+		boolean valid = fruit.isSliced();
+		return valid;
+
 	}
 
 	@Override

@@ -8,6 +8,7 @@ public abstract class Fruit implements GameObject {
 	private int MinHeight;
 	private int InitialVelocity;
 	private int FallingVelocity;
+	protected boolean valid=false;
 	
 //	public ENUM getObjectType(int x) {
 //		
@@ -63,7 +64,7 @@ public abstract class Fruit implements GameObject {
 	@Override
 	public Boolean isSliced() {
 		// TODO Auto-generated method stub
-		return null;
+		return valid;
 	}
 
 	@Override

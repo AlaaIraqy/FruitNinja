@@ -130,7 +130,8 @@ public class Game1 extends Application {
 	
 		root.getChildren().addAll( swordiv ,lblscore,lblmissed);
 		
-		Scene scene = new Scene(root, 1000, 600);
+		Scene scene = new Scene(root, 1366, 768);
+		
 		scene.setCursor(Cursor.NONE);
 		
 		scene.setOnMouseMoved(e -> {
@@ -138,7 +139,7 @@ public class Game1 extends Application {
 			mouseX = e.getX();
 			mouseY = e.getY();
 			
-		});
+					});
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -169,23 +170,36 @@ public class Game1 extends Application {
 		return (int)(Math.random() * max + min);
 	}
 	public void gameUpdate(){
-		Sword x=Sword.getInstance();
+		//Sword swrd=Sword.getInstance();
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
-		x.setPositionX(mouseX);
-		x.setPositionY(mouseY);
+		Sword swrd = Sword.getInstance();
+		swrd.setPositionX(mouseX);
+		swrd.setPositionY(mouseY);
 		for(int i = 0; i < drop.size(); i++) {
 			//if get droped into square
+			//System.out.println(dropFruit.get(i)+"gui");
+			dropFruit.get(i).setXlocation(drop.get(i).getLayoutX());
+			dropFruit.get(i).setYlocation(drop.get(i).getLayoutY());
 			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150 );
-			if((((ImageView) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((ImageView) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
-					((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
+			
+			
+			
+			System.out.println(mouseX+"xxxxxxxxx");
+			System.out.println(mouseY+"yyyyyyyy");
+
+			//System.out.println("gui"+drop.get(i).getLayoutX());
+			
+			//if((((ImageView) drop.get(i)).getLayoutX() > swordiv.getLayoutX() && ((ImageView) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
+				//	((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView) drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70)	{
 				//root.getChildren().remove(((ImageView) drop.get(i)));
 				//drop.remove(i);
+			if(controller.sliceObjects()==true) {
 			  score++;
 			  lblscore.setText("Score: " + String.valueOf(score ));
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
 				 drop.get(i).setImage(cutFruit);
-			    
+			
 			  
 			  
 			  

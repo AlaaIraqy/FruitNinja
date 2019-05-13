@@ -18,7 +18,7 @@ public interface GameActions {
 This method can take your swiping region as parameters (they
 depend on how you calculate it).
 */
-public void sliceObjects();
+public boolean sliceObjects();
 /*
 *saves the current state of the game
 */
