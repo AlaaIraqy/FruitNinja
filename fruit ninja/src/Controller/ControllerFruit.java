@@ -6,6 +6,7 @@ import Model.GameObjectFactory;
 
 public class ControllerFruit implements GameActions{
     GameObject fruit;
+    int score=0;
    
 	@Override
 	public GameObject createGameObject() {
@@ -23,10 +24,12 @@ public class ControllerFruit implements GameActions{
 	@Override
 	public boolean sliceObjects() {
 		fruit.slice(); 
-    	// System.out.println(fruit+"logic");
-		boolean valid = fruit.isSliced();
-		return valid;
-
+		if( fruit.isSliced()) {
+		score++;
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
@@ -46,6 +49,8 @@ public class ControllerFruit implements GameActions{
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public int getScore() {
+		return  this.score;
+	}
 
 }

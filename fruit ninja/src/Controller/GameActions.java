@@ -31,4 +31,5 @@ public void loadGame();
 *resets the game to its initial state
 */
 public void ResetGame();
+public int getScore();
 }

@@ -7,7 +7,7 @@ public class GameObjectFactory {
     	  int i;
     	  Random rand  = new Random();
     	  i = rand.nextInt(5);
-    	  i=0;
+    	  
     	  if(i==0) {
     		  return new Apple();}
     	  else if(i==1) {

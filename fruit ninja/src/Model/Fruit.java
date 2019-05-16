@@ -9,7 +9,7 @@ public abstract class Fruit implements GameObject {
 	private int InitialVelocity;
 	private int FallingVelocity;
 	protected boolean valid=false;
-	
+	protected Sword swrd = Sword.getInstance();
 //	public ENUM getObjectType(int x) {
 //		
 //		if(x==1)
@@ -77,11 +77,7 @@ public abstract class Fruit implements GameObject {
 		return false;
 	}
 
-	@Override
-	public void slice() {
-		// TODO Auto-generated method stub
 		
-	}
 
 	@Override
 	public void move(double time) {
@@ -100,4 +96,13 @@ public abstract class Fruit implements GameObject {
 	public void setYlocation(double  Ylocation) {
 		this.Ylocation = Ylocation;
 	}
+	public void slice() {
+   	 
+   	 if( ( (getXlocation() > swrd.getPositionX()-80 )&& (getXlocation() < swrd.getPositionX()+100 ) )&&
+   			 ( (getYlocation() > swrd.getPositionY()-80) && (getYlocation()< swrd.getPositionY()+100 ) ) )	{
+   	//	 System.out.println("logicc"+getYlocation());
+   		 valid = true;
+    }
+
+}
 }

@@ -8,6 +8,7 @@ import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 
 public class Peach extends Fruit {
+	Sword swrd = Sword.getInstance();
 	 public BufferedImage[] getBufferedImages() {
 			BufferedImage[] arr = new BufferedImage[5];
 
@@ -29,4 +30,13 @@ public class Peach extends Fruit {
 			return arr;
 		   
 	   }
+// public void slice() {
+//    	 
+//    	 if( ( (getXlocation() > swrd.getPositionX()-80 )&& (getXlocation() < swrd.getPositionX()+100 ) )&&
+//    			 ( (getYlocation() > swrd.getPositionY()-80) && (getYlocation()< swrd.getPositionY()+100 ) ) )	{
+//    	//	 System.out.println("logicc"+getYlocation());
+//    		 valid = true;
+//     }
+//
+//}
 }

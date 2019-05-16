@@ -59,4 +59,5 @@ public BufferedImage [] getBufferedImages();
 public void setXlocation(double xlocation);
 public void setYlocation(double ylocation);
 
+
 }
