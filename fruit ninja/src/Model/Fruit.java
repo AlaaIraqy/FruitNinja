@@ -8,8 +8,9 @@ public abstract class Fruit implements GameObject {
 	private int MinHeight;
 	private int InitialVelocity;
 	private int FallingVelocity;
-	protected boolean valid=false;
-	protected Sword swrd = Sword.getInstance();
+     boolean valid=false;
+	 boolean cutFlag=true;
+	 Sword swrd = Sword.getInstance();
 //	public ENUM getObjectType(int x) {
 //		
 //		if(x==1)
@@ -98,11 +99,15 @@ public abstract class Fruit implements GameObject {
 	}
 	public void slice() {
    	 
-   	 if( ( (getXlocation() > swrd.getPositionX()-80 )&& (getXlocation() < swrd.getPositionX()+100 ) )&&
+   	 if( cutFlag&&( (getXlocation() > swrd.getPositionX()-80 )&& (getXlocation() < swrd.getPositionX()+100 ) )&&
    			 ( (getYlocation() > swrd.getPositionY()-80) && (getYlocation()< swrd.getPositionY()+100 ) ) )	{
-   	//	 System.out.println("logicc"+getYlocation());
+   		
+   		 cutFlag = false;
    		 valid = true;
     }
 
 }
+	public void setCutFlag(boolean  flag) {
+		cutFlag=flag;
+	}
 }

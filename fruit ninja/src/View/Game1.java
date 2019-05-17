@@ -42,14 +42,15 @@ public class Game1 extends Application {
 	double falling;
 	Label lblscore;
 	Label lblmissed;
-
+   
 	int missed = 0;
 	Timeline timeline;
 
 	GameObject fruit;
 
 	GameActions controller = new ControllerFruit();
-
+    int dropFruitCount=controller.getListCount();
+   
 	public static void main(String[] args) {
 		launch();
 
@@ -57,6 +58,7 @@ public class Game1 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+	    dropFruit = controller.getObjectList();
 		String background = "-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
 
@@ -78,34 +80,27 @@ public class Game1 extends Application {
 
 		speed = 0.2;
 		falling = 500;
+		timeline = new Timeline(new KeyFrame(Duration.millis(2000), event -> {
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
-//			 Image apple = new Image("apple-0.png");
-//			 ImageView appleiv = new ImageView(apple);
-//			 appleiv.setLayoutX(rand(0,1000));
-//				appleiv.setLayoutY(1);
-			// drop.clear();
-//			 dropFruit.clear();
-
-			fruit = controller.createGameObject();
-			dropFruit.add(fruit);
+            controller.updateObjects();
+		
+            fruit = dropFruit.get(dropFruitCount);
+    	//	dropFruitCount++;
+            fruit.setCutFlag(true);
+			
+			
+			
 			Image fruitimg = SwingFXUtils.toFXImage(fruit.getBufferedImages()[0], null);
 			ImageView fruitiv = new ImageView(fruitimg);
 			fruitiv.setLayoutX(rand(50, 900));
 			fruitiv.setLayoutY(1);
 			drop.add(fruitiv);
-
-			// appleiv.setFitHeight(150);
-			// appleiv.setFitWidth(120);
-
+			 System.out.println(dropFruit.get(dropFruitCount)+"timline");
+			
 			speed += falling / 3000;
 			
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
-//			}else {
-//			drop.add(peachiv);
-//			root.getChildren().add((Node) (drop.get(drop.size() -1)));
-//			}
-			System.out.println(dropFruit);
+
 		}));
 
 		timeline.setCycleCount(1000);
@@ -115,7 +110,7 @@ public class Game1 extends Application {
 
 			@Override
 			public void handle(long arg0) {
-
+		
 		gameUpdate();
 				
 			
@@ -126,7 +121,6 @@ public class Game1 extends Application {
 		timer.start();
         drop.clear();
 
-		// cont = swordiv;
 
 		root.getChildren().addAll(swordiv, lblscore, lblmissed);
 
@@ -153,7 +147,7 @@ public class Game1 extends Application {
 	}
 
 	public void gameUpdate() {
-		// Sword swrd=Sword.getInstance();
+		
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();
@@ -161,42 +155,23 @@ public class Game1 extends Application {
 		swrd.setPositionY(mouseY);
 
 		for (int i = 0; i < drop.size(); i++) {
-			// if get droped into square
-			// System.out.println(dropFruit.get(i)+"gui");
+			
 			dropFruit.get(i).setXlocation(drop.get(i).getLayoutX());
 			dropFruit.get(i).setYlocation(drop.get(i).getLayoutY());
 			((ImageView) drop.get(i)).setLayoutY(
 					((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150);
-//		
 
-			// System.out.println("gui"+drop.get(i).getLayoutX());
-
-			// if((((ImageView) drop.get(i)).getLayoutX() > swordiv.getLayoutX() &&
-			// ((ImageView) drop.get(i)).getLayoutX() < swordiv.getLayoutX() + 70) &&
-			// ((ImageView) drop.get(i)).getLayoutY() > swordiv.getLayoutY() && ((ImageView)
-			// drop.get(i)).getLayoutY() < swordiv.getLayoutY() + 70) {
-			// root.getChildren().remove(((ImageView) drop.get(i)));
-			// drop.remove(i);
-			if (controller.sliceObjects() == true) {
-			
+		
+			if (controller.sliceObjects(i) == true) {
+			    dropFruit.get(i).setCutFlag(false);
 				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
 				drop.get(i).setImage(cutFruit);
-		 
-//		       if(i%2==1) drop.get(i).setImage(cutpeach);
-//		        if(i%2==0)
-//		        drop.get(i).setImage(cut);
-
-//				}else {
-//					 drop.get(i).setImage(cutpeach);
-//					 
-//				}
-//				
+		        System.out.println(dropFruit.get(i)+"gameupdate");    
+//drop.remove(i);
+//dropFruit.remove(i);
 				missed--;
-				// System.out.println(i+" "+missed);
-				// root.getChildren().remove(((ImageView) drop.get(i)));
-				// drop.remove(i);
-
+				
 			}
 
 			// if missed remove
@@ -206,8 +181,6 @@ public class Game1 extends Application {
 				dropFruit.remove(i);
 				lives--;
 				lblmissed.setText("Lives: " + String.valueOf(lives));
-
-				// lblMissed.setStyle(Color.WHITE);
 
 			}
 

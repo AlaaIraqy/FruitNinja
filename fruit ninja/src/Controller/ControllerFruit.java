@@ -1,18 +1,24 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.Fruit;
 import Model.GameObject;
 import Model.GameObjectFactory;
 
 public class ControllerFruit implements GameActions{
-    GameObject fruit;
+   List<GameObject> fruit  = new ArrayList<GameObject>();
     int score=0;
-   
+    int listCount=0;
 	@Override
-	public GameObject createGameObject() {
+	public void createGameObject() {
 		GameObjectFactory factory = new GameObjectFactory();
-		fruit=factory.createFruit();
-		return fruit;
+		GameObject fruitObject;
+		fruitObject = factory.createFruit();
+		fruit.add(fruitObject);
+		listCount++;
+		//return fruitObject;
 	}
 
 	@Override
@@ -21,15 +27,22 @@ public class ControllerFruit implements GameActions{
 		
 	}
 
-	@Override
-	public boolean sliceObjects() {
-		fruit.slice(); 
-		if( fruit.isSliced()) {
+	
+	public boolean sliceObjects(int i) {
+	
+			fruit.get(i).slice(); 
+
+		if( fruit.get(i).isSliced()) {
+			
 		score++;
 			return true;
-		}else {
-			return false;
 		}
+//		}else {
+//			System.out.println("notSliced");
+//			return false;
+//		}
+		//}
+		return false;
 	}
 
 	@Override
@@ -52,5 +65,14 @@ public class ControllerFruit implements GameActions{
 	public int getScore() {
 		return  this.score;
 	}
-
+	public List<GameObject> getObjectList(){
+		return fruit;
+	}
+	public void updateObjects() {
+		createGameObject();
+	}
+public int getListCount() {
+	return this.listCount;
+}
+	
 }

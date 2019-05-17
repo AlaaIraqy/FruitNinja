@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import Model.GameObject;
 
 public interface GameActions {
@@ -7,7 +9,7 @@ public interface GameActions {
 	/*
 	*@return created game object
 	*/
-	public GameObject createGameObject();
+	public void createGameObject();
 	/*
 	* update moving objects locations
 	* 
@@ -18,7 +20,7 @@ public interface GameActions {
 This method can take your swiping region as parameters (they
 depend on how you calculate it).
 */
-public boolean sliceObjects();
+public boolean sliceObjects(int i);
 /*
 *saves the current state of the game
 */
@@ -32,4 +34,7 @@ public void loadGame();
 */
 public void ResetGame();
 public int getScore();
+public List<GameObject> getObjectList();
+public void updateObjects();
+public int getListCount();
 }

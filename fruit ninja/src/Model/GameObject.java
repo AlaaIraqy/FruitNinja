@@ -58,6 +58,7 @@ public BufferedImage [] getBufferedImages();
 
 public void setXlocation(double xlocation);
 public void setYlocation(double ylocation);
+public void setCutFlag(boolean b);
 
 
 }

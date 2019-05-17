@@ -76,4 +76,10 @@ public class Boom implements GameObject {
 		
 	}
 
+	@Override
+	public void setCutFlag(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
