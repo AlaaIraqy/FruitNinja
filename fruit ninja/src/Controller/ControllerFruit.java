@@ -11,6 +11,8 @@ public class ControllerFruit implements GameActions{
    List<GameObject> fruit  = new ArrayList<GameObject>();
     int score=0;
     int listCount=0;
+    int lives = 3;
+    boolean valid;
 	@Override
 	public void createGameObject() {
 		GameObjectFactory factory = new GameObjectFactory();
@@ -42,6 +44,7 @@ public class ControllerFruit implements GameActions{
 //			return false;
 //		}
 		//}
+		
 		return false;
 	}
 
@@ -71,11 +74,24 @@ public class ControllerFruit implements GameActions{
 	public void updateObjects() {
 		createGameObject();
 	}
+	public boolean hasMovedOfScreenBoundary(int i) {
+		valid=fruit.get(i).hasMovedOffScreen();
+		if(valid==true) {
+			lives--;
+		}
+		return valid;
+	}
 public int getListCount() {
 	return this.listCount;
 }
 public void setListCount(int listCount) {
 	this.listCount = listCount;
 }
-	
+
+public int getLives() {
+	return this.lives;
+}
+public void setLives(int lives) {
+	this.lives = lives;
+}
 }

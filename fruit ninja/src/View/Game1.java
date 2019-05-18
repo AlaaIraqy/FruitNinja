@@ -72,7 +72,7 @@ public class Game1 extends Application {
 		lblscore.setFont(new Font("Arial", 40));
 		lblscore.setLayoutX(10);
 		lblscore.setLayoutY(10);
-		lblmissed = new Label("Lives: 0");
+		lblmissed = new Label("Lives: "+controller.getLives());
 		lblmissed.setFont(new Font("Arial", 40));
 		lblmissed.setLayoutX(850);
 		lblmissed.setLayoutY(10);
@@ -203,14 +203,12 @@ public class Game1 extends Application {
 			}
 
 			// if missed remove
-			else if (((ImageView) drop.get(i)).getLayoutY() >= 600) {
+			else if (controller.hasMovedOfScreenBoundary(i)) {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
-				
 				controller.getObjectList().remove(i);
-			
-				lives--;
-				lblmissed.setText("Lives: " + String.valueOf(lives));
+				controller.setLives(controller.getLives());
+				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 
 			}
 

@@ -5,7 +5,7 @@ public abstract class Fruit implements GameObject {
 
 	private double Xlocation;
 	private double Ylocation;
-	private int MinHeight;
+	private int MinHeight=600;
 	private int InitialVelocity;
 	private int FallingVelocity;
      boolean valid=false;

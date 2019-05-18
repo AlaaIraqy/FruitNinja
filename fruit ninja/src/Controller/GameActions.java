@@ -38,4 +38,7 @@ public List<GameObject> getObjectList();
 public void updateObjects();
 public int getListCount();
 public void setListCount(int i);
+public void setLives(int i);
+public int getLives();
+public boolean hasMovedOfScreenBoundary(int i);
 }
