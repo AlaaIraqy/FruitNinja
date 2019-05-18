@@ -54,7 +54,7 @@ public class Game1 extends Application {
 	Gameoversubscene gameover=new Gameoversubscene();
 
 	GameActions controller = new ControllerFruit();
-   
+    
 	public static void main(String[] args) {
 		launch();
 
@@ -63,6 +63,7 @@ public class Game1 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 //	    dropFruit = controller.getObjectList();
+		controller.setStrategy(strategy);
 		String background = "-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
 		root.getChildren().add(gameover);
@@ -176,6 +177,22 @@ public class Game1 extends Application {
 				ImageView cutFruitiv = new ImageView(cutFruit1);
 				cutFruitiv.setLayoutX(drop.get(i).getLayoutX()+50);
 				cutFruitiv.setLayoutY(drop.get(i).getLayoutY());
+				if(controller.getObjectList().get(i) instanceof SpecialFruit){
+					System.out.println("hiiiiiiiiiiiii");
+					Image effect = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[3], null); 
+					ImageView effectiv = new ImageView(effect);
+					effectiv.setLayoutX(drop.get(i).getLayoutX());
+					effectiv.setLayoutY(drop.get(i).getLayoutY());
+					effectiv.setFitHeight(drop.get(i).getFitHeight()+120);
+					effectiv.setFitWidth(drop.get(i).getFitWidth()+120);
+					root.getChildren().add(effectiv);
+					TranslateTransition objeffect = new TranslateTransition();
+					objeffect.setDuration(Duration.seconds(1.5));
+					objeffect.setNode(effectiv);
+			        objeffect.setToY(1000);
+					objeffect.play();
+				}
+				
 				root.getChildren().add(cutFruitiv);
 //				System.out.println("AFTER SLICE "+ i + "__" + controller.getObjectList().get(i));
 				drop.get(i).setImage(cutFruit);

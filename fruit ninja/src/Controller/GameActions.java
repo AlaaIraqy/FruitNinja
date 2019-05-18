@@ -3,6 +3,7 @@ package Controller;
 import java.util.List;
 
 import Model.GameObject;
+import Model.IGameStrategy;
 
 public interface GameActions {
 
@@ -41,4 +42,5 @@ public void setListCount(int i);
 public void setLives(int i);
 public int getLives();
 public boolean hasMovedOfScreenBoundary(int i);
+public void setStrategy(IGameStrategy strategy);
 }
