@@ -15,7 +15,9 @@ import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundImage;
@@ -49,6 +51,7 @@ public class Game1 extends Application {
 	Timeline timeline;
 
 	GameObject fruit;
+	Gameoversubscene gameover=new Gameoversubscene();
 
 	GameActions controller = new ControllerFruit();
    
@@ -62,6 +65,7 @@ public class Game1 extends Application {
 //	    dropFruit = controller.getObjectList();
 		String background = "-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
+		root.getChildren().add(gameover);
 
 		Image sword = new Image("sword.png");
 		swordiv = new ImageView(sword);
@@ -210,6 +214,11 @@ public class Game1 extends Application {
 				drop.remove(i);
 				controller.getObjectList().remove(i);
 				controller.setLives(controller.getLives());
+				if(controller.getLives()==0) {gameover.moveSubscene();lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+				for(int k=0;k<drop.size();k++) {root.getChildren().remove(drop.get(k));}
+			drop.clear();	timeline.pause();
+			}
+				if(controller.getLives()>0)
 				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 
 			}
