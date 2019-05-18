@@ -32,19 +32,20 @@ public class Game1 extends Application {
 	AnimationTimer timer;
 	Pane root = new Pane();
 	List<ImageView> drop = new ArrayList<>();
+	IGameStrategy strategy = new Difficult();
 //	List<GameObject> dropFruit = new ArrayList<>();
 	double mouseX;
 	double mouseY;
 	int random;
-	int lives = 3;
-	int score = 0;
+	//int lives = 3;
+	//int score = 0;
 	ImageView swordiv;
-	double speed;
-	double falling;
+	//double speed;
+	//double falling;
 	Label lblscore;
 	Label lblmissed;
    
-	int missed = 0;
+	//int missed = 0;
 	Timeline timeline;
 
 	GameObject fruit;
@@ -76,11 +77,11 @@ public class Game1 extends Application {
 		lblmissed.setFont(new Font("Arial", 40));
 		lblmissed.setLayoutX(850);
 		lblmissed.setLayoutY(10);
-		missed = 0;
+		//missed = 0;
 
-		speed = 0.2;
-		falling = 500;
-		timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
+		//speed = 0.2;
+		//falling = 500;
+		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
 			
             controller.createGameObject();
             	
@@ -96,7 +97,8 @@ public class Game1 extends Application {
 			drop.add(fruitiv);
 	//		 System.out.println(controller.getObjectList().get(dropFruitCount)+"timline");
 			
-			speed += falling / 3000;
+//			speed += falling / 3000;
+			strategy.updateSpeed();
 			
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
 
@@ -158,7 +160,7 @@ public class Game1 extends Application {
 			controller.getObjectList().get(i).setXlocation(drop.get(i).getLayoutX());
 			controller.getObjectList().get(i).setYlocation(drop.get(i).getLayoutY());
 			((ImageView) drop.get(i)).setLayoutY(
-					((ImageView) drop.get(i)).getLayoutY() + speed + ((ImageView) drop.get(i)).getLayoutY() / 150);
+					((ImageView) drop.get(i)).getLayoutY() + strategy.getSpeed() + ((ImageView) drop.get(i)).getLayoutY() / 150);
 			
 //			System.out.println("BEFORE SLICE "+ i + "__" + controller.getObjectList().get(i));
 		
@@ -198,7 +200,7 @@ public class Game1 extends Application {
 		      
 		      drop.remove(i);
 		       
-				missed--;
+			//	missed--;
 				
 			}
 
