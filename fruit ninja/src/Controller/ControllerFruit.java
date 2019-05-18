@@ -56,11 +56,7 @@ public class ControllerFruit implements GameActions{
 		score++;
 			return true;
 		}
-//		}else {
-//			System.out.println("notSliced");
-//			return false;
-//		}
-		//}
+
 		
 		return false;
 	}

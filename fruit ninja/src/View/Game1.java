@@ -39,22 +39,22 @@ public class Game1 extends Application {
 	double mouseX;
 	double mouseY;
 	int random;
-	//int lives = 3;
-	//int score = 0;
+	// int lives = 3;
+	// int score = 0;
 	ImageView swordiv;
-	//double speed;
-	//double falling;
+	// double speed;
+	// double falling;
 	Label lblscore;
 	Label lblmissed;
-   
-	//int missed = 0;
+
+	// int missed = 0;
 	Timeline timeline;
 
 	GameObject fruit;
-	Gameoversubscene gameover=new Gameoversubscene();
+	Gameoversubscene gameover = new Gameoversubscene();
 
 	GameActions controller = new ControllerFruit();
-    
+
 	public static void main(String[] args) {
 		launch();
 
@@ -73,38 +73,36 @@ public class Game1 extends Application {
 
 		swordiv.setFitHeight(160);
 		swordiv.setFitWidth(100);
- 
+
 		lblscore = new Label("Score: 0");
 		lblscore.setFont(new Font("Arial", 40));
 		lblscore.setLayoutX(10);
 		lblscore.setLayoutY(10);
-		lblmissed = new Label("Lives: "+controller.getLives());
+		lblmissed = new Label("Lives: " + controller.getLives());
 		lblmissed.setFont(new Font("Arial", 40));
 		lblmissed.setLayoutX(850);
 		lblmissed.setLayoutY(10);
-		//missed = 0;
+		// missed = 0;
 
-		//speed = 0.2;
-		//falling = 500;
+		// speed = 0.2;
+		// falling = 500;
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
-			
-            controller.createGameObject();
-            	
 
-            controller.getObjectList().get(controller.getListCount() - 1) .setCutFlag(true);
-			
-			
-			
-			Image fruitimg = SwingFXUtils.toFXImage( controller.getObjectList().get(controller.getListCount() - 1).getBufferedImages()[0], null);
+			controller.createGameObject();
+
+			controller.getObjectList().get(controller.getListCount() - 1).setCutFlag(true);
+
+			Image fruitimg = SwingFXUtils.toFXImage(
+					controller.getObjectList().get(controller.getListCount() - 1).getBufferedImages()[0], null);
 			ImageView fruitiv = new ImageView(fruitimg);
 			fruitiv.setLayoutX(rand(50, 900));
 			fruitiv.setLayoutY(1);
 			drop.add(fruitiv);
-	//		 System.out.println(controller.getObjectList().get(dropFruitCount)+"timline");
-			
+			// System.out.println(controller.getObjectList().get(dropFruitCount)+"timline");
+
 //			speed += falling / 3000;
 			strategy.updateSpeed();
-			
+
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
 
 		}));
@@ -116,17 +114,14 @@ public class Game1 extends Application {
 
 			@Override
 			public void handle(long arg0) {
-		
-		gameUpdate();
-				
-			
-                 
+
+				gameUpdate();
+
 			}
 
 		};
 		timer.start();
-        drop.clear();
-
+		drop.clear();
 
 		root.getChildren().addAll(swordiv, lblscore, lblmissed);
 
@@ -146,14 +141,12 @@ public class Game1 extends Application {
 
 	}
 
-
-
 	public int rand(int min, int max) {
 		return (int) (Math.random() * max + min);
 	}
 
 	public void gameUpdate() {
-		
+
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();
@@ -161,68 +154,64 @@ public class Game1 extends Application {
 		swrd.setPositionY(mouseY);
 
 		for (int i = 0; i < drop.size(); i++) {
-			
+
 			controller.getObjectList().get(i).setXlocation(drop.get(i).getLayoutX());
 			controller.getObjectList().get(i).setYlocation(drop.get(i).getLayoutY());
-			((ImageView) drop.get(i)).setLayoutY(
-					((ImageView) drop.get(i)).getLayoutY() + strategy.getSpeed() + ((ImageView) drop.get(i)).getLayoutY() / 150);
-			
+			((ImageView) drop.get(i)).setLayoutY(((ImageView) drop.get(i)).getLayoutY() + strategy.getSpeed()
+					+ ((ImageView) drop.get(i)).getLayoutY() / 150);
+
 //			System.out.println("BEFORE SLICE "+ i + "__" + controller.getObjectList().get(i));
-		
+
 			if (controller.sliceObjects(i) == true) {
 				controller.getObjectList().get(i).setCutFlag(false);
 				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[1], null);
-				Image cutFruit1 = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[2], null);
+				Image cutFruit1 = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[2],
+						null);
 				ImageView cutFruitiv = new ImageView(cutFruit1);
-				cutFruitiv.setLayoutX(drop.get(i).getLayoutX()+50);
+				cutFruitiv.setLayoutX(drop.get(i).getLayoutX() + 50);
 				cutFruitiv.setLayoutY(drop.get(i).getLayoutY());
-				if(controller.getObjectList().get(i) instanceof SpecialFruit){
+				if (controller.getObjectList().get(i) instanceof SpecialFruit) {
 					System.out.println("hiiiiiiiiiiiii");
-					Image effect = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[3], null); 
+					Image effect = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[3],
+							null);
 					ImageView effectiv = new ImageView(effect);
 					effectiv.setLayoutX(drop.get(i).getLayoutX());
 					effectiv.setLayoutY(drop.get(i).getLayoutY());
-					effectiv.setFitHeight(drop.get(i).getFitHeight()+120);
-					effectiv.setFitWidth(drop.get(i).getFitWidth()+120);
+					effectiv.setFitHeight(drop.get(i).getFitHeight() + 120);
+					effectiv.setFitWidth(drop.get(i).getFitWidth() + 120);
 					root.getChildren().add(effectiv);
 					TranslateTransition objeffect = new TranslateTransition();
 					objeffect.setDuration(Duration.seconds(1.5));
 					objeffect.setNode(effectiv);
-			        objeffect.setToY(1000);
+					objeffect.setToY(1000);
 					objeffect.play();
 				}
-				
+
 				root.getChildren().add(cutFruitiv);
 //				System.out.println("AFTER SLICE "+ i + "__" + controller.getObjectList().get(i));
 				drop.get(i).setImage(cutFruit);
-		        //System.out.println(controller.getObjectList().get(i)+"gameupdate"); 
-		        TranslateTransition obj = new TranslateTransition();
+				// System.out.println(controller.getObjectList().get(i)+"gameupdate");
+				TranslateTransition obj = new TranslateTransition();
 				obj.setDuration(Duration.seconds(1.5));
 				obj.setNode(drop.get(i));
-		        obj.setToY(1000);
+				obj.setToY(1000);
 				obj.play();
-				 TranslateTransition obj2 = new TranslateTransition();
-					obj2.setDuration(Duration.seconds(1.5));
-					obj2.setNode(cutFruitiv);
-			        obj2.setToY(1000);
-					obj2.play();
-		        
-		        
-		        
-		        
-		        
-		        
-		        //root.getChildren().remove(drop.get(i));
-		       
-					controller.getObjectList().remove(i);
-		    //  root.getChildren().add(drop.get(i));
-		     
-		      
-		      drop.remove(i);
-		       
-			//	missed--;
-				
+				TranslateTransition obj2 = new TranslateTransition();
+				obj2.setDuration(Duration.seconds(1.5));
+				obj2.setNode(cutFruitiv);
+				obj2.setToY(1000);
+				obj2.play();
+
+				// root.getChildren().remove(drop.get(i));
+
+				controller.getObjectList().remove(i);
+				// root.getChildren().add(drop.get(i));
+
+				drop.remove(i);
+
+				// missed--;
+
 			}
 
 			// if missed remove
@@ -231,12 +220,17 @@ public class Game1 extends Application {
 				drop.remove(i);
 				controller.getObjectList().remove(i);
 				controller.setLives(controller.getLives());
-				if(controller.getLives()==0) {gameover.moveSubscene();lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
-				for(int k=0;k<drop.size();k++) {root.getChildren().remove(drop.get(k));}
-			drop.clear();	timeline.pause();
-			}
-				if(controller.getLives()>0)
-				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+				if (controller.getLives() == 0) {
+					gameover.moveSubscene();
+					lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+					for (int k = 0; k < drop.size(); k++) {
+						root.getChildren().remove(drop.get(k));
+					}
+					drop.clear();
+					timeline.pause();
+				}
+				if (controller.getLives() > 0)
+					lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 
 			}
 

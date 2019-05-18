@@ -6,7 +6,7 @@ public class GameObjectFactory {
       public GameObject createFruit() {
     	  int i;
     	  Random rand  = new Random();
-    	  i = rand.nextInt(5);
+    	  i = rand.nextInt(6);
     	  if(i==0) {
     		  return new Apple();}
     	  else if(i==1) {
