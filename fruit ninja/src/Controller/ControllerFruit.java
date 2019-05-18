@@ -17,7 +17,7 @@ public class ControllerFruit implements GameActions{
 		GameObject fruitObject;
 		fruitObject = factory.createFruit();
 		fruit.add(fruitObject);
-		listCount++;
+		listCount=fruit.size();
 		//return fruitObject;
 	}
 
@@ -73,6 +73,9 @@ public class ControllerFruit implements GameActions{
 	}
 public int getListCount() {
 	return this.listCount;
+}
+public void setListCount(int listCount) {
+	this.listCount = listCount;
 }
 	
 }
