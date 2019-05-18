@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Basaha;
 import Model.Fruit;
 import Model.GameObject;
 import Model.GameObjectFactory;
@@ -35,7 +36,9 @@ public class ControllerFruit implements GameActions{
 			fruit.get(i).slice(); 
 
 		if( fruit.get(i).isSliced()) {
-			
+			if(fruit.get(i) instanceof Basaha) {
+				score = score+1;
+			}
 		score++;
 			return true;
 		}
