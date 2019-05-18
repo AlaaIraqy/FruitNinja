@@ -68,7 +68,7 @@ public class Game1 extends Application {
 
 		swordiv.setFitHeight(160);
 		swordiv.setFitWidth(100);
-
+ 
 		lblscore = new Label("Score: 0");
 		lblscore.setFont(new Font("Arial", 40));
 		lblscore.setLayoutX(10);
@@ -167,6 +167,11 @@ public class Game1 extends Application {
 			    dropFruit.get(i).setCutFlag(false);
 				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
+				Image cutFruit1 = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[2], null);
+				ImageView cutFruitiv = new ImageView(cutFruit1);
+				cutFruitiv.setLayoutX(drop.get(i).getLayoutX()+50);
+				cutFruitiv.setLayoutY(drop.get(i).getLayoutY());
+				root.getChildren().add(cutFruitiv);
 				drop.get(i).setImage(cutFruit);
 		        System.out.println(dropFruit.get(i)+"gameupdate"); 
 		        TranslateTransition obj = new TranslateTransition();
@@ -174,7 +179,11 @@ public class Game1 extends Application {
 				obj.setNode(drop.get(i));
 		        obj.setToY(1000);
 				obj.play();
-		        
+				 TranslateTransition obj2 = new TranslateTransition();
+					obj2.setDuration(Duration.seconds(1.5));
+					obj2.setNode(cutFruitiv);
+			        obj2.setToY(1000);
+					obj2.play();
 		        
 		        
 		        
