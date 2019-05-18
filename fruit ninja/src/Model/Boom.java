@@ -11,8 +11,6 @@ public class Boom implements GameObject {
 	private double Xlocation;
 	private double Ylocation;
 	private int MinHeight=600;
-	private int InitialVelocity;
-	private int FallingVelocity;
      boolean valid=false;
 	 boolean cutFlag=true;
 	 Sword swrd = Sword.getInstance();
@@ -83,10 +81,9 @@ public class Boom implements GameObject {
 BufferedImage[] arr = new BufferedImage[5];
 		
 		BufferedImage img = null;
-for(int i=0;i<3;i++) {
 		File file =  new File("boom.png");
-	try {
-	
+		try {
+			
 			img = ImageIO.read(file);
 		} catch (IIOException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +91,18 @@ for(int i=0;i<3;i++) {
 		}catch(IOException e) {
 			
 		}
-
+		arr[0]=img;
+for(int i=1;i<3;i++) {
+	 file =  new File("boom"+i+".png");
+	try {
+		
+		img = ImageIO.read(file);
+	} catch (IIOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}catch(IOException e) {
+		
+	}
 		arr[i] = img;
 }
 		return arr;

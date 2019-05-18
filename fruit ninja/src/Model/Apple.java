@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
-
-import javafx.scene.image.ImageView;
 public class Apple  extends Fruit{
 //	Sword swrd = Sword.getInstance();
 	

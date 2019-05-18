@@ -3,7 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import Model.Basaha;
+import Model.Boom;
 import Model.GameObject;
 import Model.GameObjectFactory;
 import Model.IGameStrategy;
@@ -25,16 +25,21 @@ public class ControllerFruit implements GameActions{
 		GameObject fruitObject;
 		j=rand.nextInt(10);
 		if(j!=0){
-			
 			fruitObject = factory.createFruit();
 			fruit.add(fruitObject);
 			listCount=fruit.size();
 		}
 		else{
 			fruitObject = factory.createFruit();
-			Special= new SpecialFruit(fruitObject);
-			fruit.add(Special);
-			listCount=fruit.size();
+			if(fruitObject instanceof Boom){
+				fruit.add(fruitObject);
+				listCount=fruit.size();
+			}
+			else{
+				Special= new SpecialFruit(fruitObject);
+				fruit.add(Special);
+				listCount=fruit.size();
+			}
 		}
 	}
 
@@ -52,7 +57,11 @@ public class ControllerFruit implements GameActions{
 				score = score+1;
 		        strategy.setSpeed(0.01);
 			}
-			
+			else if(fruit.get(i) instanceof Boom){
+				lives--;
+				score--;
+				System.out.println("hye");
+			}
 		score++;
 			return true;
 		}
@@ -89,7 +98,10 @@ public class ControllerFruit implements GameActions{
 	}
 	public boolean hasMovedOfScreenBoundary(int i) {
 		valid=fruit.get(i).hasMovedOffScreen();
-		if(valid==true) {
+		if(valid==true&&fruit.get(i) instanceof Boom) {
+			
+		}
+		else if(valid==true){
 			lives--;
 		}
 		return valid;
