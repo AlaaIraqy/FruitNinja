@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Cursor;
@@ -80,7 +81,7 @@ public class Game1 extends Application {
 
 		speed = 0.2;
 		falling = 500;
-		timeline = new Timeline(new KeyFrame(Duration.millis(2000), event -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
 
             controller.updateObjects();
 		
@@ -167,9 +168,27 @@ public class Game1 extends Application {
 				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(dropFruit.get(i).getBufferedImages()[1], null);
 				drop.get(i).setImage(cutFruit);
-		        System.out.println(dropFruit.get(i)+"gameupdate");    
-//drop.remove(i);
-//dropFruit.remove(i);
+		        System.out.println(dropFruit.get(i)+"gameupdate"); 
+		        TranslateTransition obj = new TranslateTransition();
+				obj.setDuration(Duration.seconds(1.5));
+				obj.setNode(drop.get(i));
+		        obj.setToY(1000);
+				obj.play();
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        //root.getChildren().remove(drop.get(i));
+		       
+		      dropFruit.remove(i);
+		    //  root.getChildren().add(drop.get(i));
+		     
+		      
+		      drop.remove(i);
+		       
 				missed--;
 				
 			}
