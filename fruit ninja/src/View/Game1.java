@@ -2,10 +2,10 @@ package View;
 
 import Model.*;
 import Controller.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.prism.paint.Color;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -49,7 +51,14 @@ public class Game1 extends Application {
 
 	GameObject fruit;
 	Gameoversubscene gameover = new Gameoversubscene();
-
+	Media intro = new Media(new File("intro.mp3").toURI().toString()); 
+	 MediaPlayer introPlayer = new MediaPlayer(intro); 
+	 Media GameOver = new Media(new File("GameOver.mp3").toURI().toString()); 
+	 MediaPlayer GameOverPlayer = new MediaPlayer(GameOver); 
+	 Media splatter = new Media(new File("splatter.mp3").toURI().toString()); 
+	 MediaPlayer splatterPlayer = new MediaPlayer(splatter); 
+	 Media boom = new Media(new File("boom.mp3").toURI().toString()); 
+	 MediaPlayer boomPlayer = new MediaPlayer(boom); 
 	GameActions controller = ControllerFruit.getInstance();
 	long start = System.currentTimeMillis();
 	public static void main(String[] args) {
@@ -59,6 +68,7 @@ public class Game1 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		introPlayer.play();
 //	    dropFruit = controller.getObjectList();
 		controller.setStrategy(strategy);
 		String background = "-fx-background-image: url('file:background.png');";
@@ -172,6 +182,7 @@ public class Game1 extends Application {
 				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 			}
 			if (controller.sliceObjects(i) == true) {
+				splatterPlayer.play();
 				controller.getObjectList().get(i).setCutFlag(false);
 				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[1], null);
@@ -192,13 +203,16 @@ public class Game1 extends Application {
 					objeffect.setNode(effectiv);
 					objeffect.setToY(1000);
 					objeffect.play();
+					splatterPlayer.stop();
+
 				}
 				else if (controller.getObjectList().get(i) instanceof Boom){
+					boomPlayer.play();
 					controller.setLives(controller.getLives());
 					if (controller.getLives() >= 0){
 						lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 					}
-
+					boomPlayer.stop();
 				}
 				root.getChildren().add(cutFruitiv);
 //				System.out.println("AFTER SLICE "+ i + "__" + controller.getObjectList().get(i));
@@ -234,6 +248,8 @@ public class Game1 extends Application {
 				controller.setLives(controller.getLives());
 			}
 			if (controller.getLives() == 0) {
+				introPlayer.stop();
+				GameOverPlayer.play();
 				gameover.moveSubscene();
 				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 				for (int k = 0; k < drop.size(); k++) {
