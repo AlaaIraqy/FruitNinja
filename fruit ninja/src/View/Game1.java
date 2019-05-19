@@ -50,7 +50,7 @@ public class Game1 extends Application {
 	GameObject fruit;
 	Gameoversubscene gameover = new Gameoversubscene();
 
-	GameActions controller = new ControllerFruit();
+	GameActions controller = ControllerFruit.getInstance();
 	long start = System.currentTimeMillis();
 	public static void main(String[] args) {
 		launch();

@@ -6,8 +6,19 @@ import java.util.Random;
 import Model.*;
 
 
+
 public class ControllerFruit implements GameActions{
+	private ControllerFruit() {
+		
+	}
+	public static ControllerFruit getInstance() {
+		return NewSingltonHolder.INSTANCE;
+	}
+	private static class NewSingltonHolder{
+		private static final ControllerFruit INSTANCE = new ControllerFruit();
+	}
    List<GameObject> fruit  = new ArrayList<GameObject>();
+   public ArrayList<Integer> gameData = new ArrayList<Integer>();
    SpecialFruit Special;
    IGameStrategy strategy;
     int score=0;
@@ -71,15 +82,24 @@ public class ControllerFruit implements GameActions{
 	@Override
 	public void saveGame() {
 		// TODO Auto-generated method stub
-		control.setCommand(new SaveGameCommand(new Save(getScore(),getHighScore(),getLives())));
+		
+		gameData.add(score);
+		gameData.add(highScore);
+		gameData.add(lives);
+		control.setCommand(new SaveGameCommand(new Save(gameData)));
 	    control.buttonWasPressed();
+	    gameData.clear();
 	}
 
 	@Override
 	public void loadGame() {
 		// TODO Auto-generated method stub
-		control.setCommand(new LoadGameCommand(new Load(getScore(),getHighScore(),getLives())));
+	
+	
+		
+		control.setCommand(new LoadGameCommand(new Load(gameData)));
 		control.buttonWasPressed();
+		
 	}
 
 	@Override

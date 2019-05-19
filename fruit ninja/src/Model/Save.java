@@ -11,45 +11,31 @@ import java.util.List;
 
 public class Save  {
 	
-	private int score;
-	private int highScore;
-	private int lives;
+	private ArrayList<Integer> gameData = new ArrayList<>();
 	
 	
-	public Save(int score, int highScore, int lives) {
+	public Save( ArrayList<Integer> gameData ) {
 		
-		this.score = score;
-		this.highScore = highScore;
-		this.lives = lives;
+		this.gameData =  gameData;
 	}
 
       
 	public void saveProgress() {
 		
-		if(score>highScore)
-		{
-			highScore=score;
+		if(gameData.get(0)>gameData.get(1))
+		{   int temp = gameData.get(0);
+			gameData.add(1, temp);
+			
 		}
 	try {
 		
-		FileOutputStream fos = new FileOutputStream(new File("Score.xml"));
+		FileOutputStream fos = new FileOutputStream(new File("gameData.xml"));
 		XMLEncoder encoder = new XMLEncoder(fos);
-		encoder.writeObject(score);
+		encoder.writeObject(gameData);
 		encoder.close();
 		fos.close();
 		
-		FileOutputStream fos2 = new FileOutputStream(new File("High Score.xml"));
-		XMLEncoder encoder2 = new XMLEncoder(fos2);
-		encoder2.writeObject(highScore);
-		encoder2.close();
-		fos2.close();
-		
-		
-		FileOutputStream fos3 = new FileOutputStream(new File("Lives.xml"));
-		XMLEncoder encoder3 = new XMLEncoder(fos3);
-		encoder3.writeObject(lives);
-		encoder3.close();
-		fos3.close();
+	
 		
 	} catch (IOException ex) {
 	};
@@ -57,36 +43,5 @@ public class Save  {
 	
 }
 
-
-	public int getScore() {
-		return score;
-	}
-
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-
-	public int getHighScore() {
-		return highScore;
-	}
-
-
-	public void setHighScore(int highScore) {
-		this.highScore = highScore;
-	}
-
-
-	public int getLives() {
-		return lives;
-	}
-
-
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-	
-	
-	
+		
 }
