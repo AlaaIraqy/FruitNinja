@@ -3,16 +3,16 @@ package Model;
 public class SaveGameCommand implements Command {
 
 	
-	Save Save;
+	Save save;
 	 
-	 public  SaveGameCommand(Save newSave){
+	 public  SaveGameCommand(Save save){
 
-	     this.Save=newSave;
+	     this.save=save;
 	 }
 
 	     @Override
 	     public void execute() {
-	         Save.saveProgress();
+	         save.saveProgress();
 
 	     }
 	     

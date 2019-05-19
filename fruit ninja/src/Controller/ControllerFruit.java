@@ -11,7 +11,7 @@ public class ControllerFruit implements GameActions{
    SpecialFruit Special;
    IGameStrategy strategy;
     int score=0;
-    int highScore;
+    int highScore=0;
     int listCount=0;
     int lives = 3;
     int j;
@@ -72,12 +72,14 @@ public class ControllerFruit implements GameActions{
 	public void saveGame() {
 		// TODO Auto-generated method stub
 		control.setCommand(new SaveGameCommand(new Save(getScore(),getHighScore(),getLives())));
+	    control.buttonWasPressed();
 	}
 
 	@Override
 	public void loadGame() {
 		// TODO Auto-generated method stub
 		control.setCommand(new LoadGameCommand(new Load(getScore(),getHighScore(),getLives())));
+		control.buttonWasPressed();
 	}
 
 	@Override

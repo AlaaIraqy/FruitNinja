@@ -1,11 +1,11 @@
 package Model;
 
+import Controller.ControllerFruit;
+
 public class Test {
 public static void main(String args[]) {
-	ENUM[] allDays = ENUM.values();
-	 
-    for (ENUM day : allDays) {
-        System.out.println("Day: " + day);
-    }
+    ControllerFruit cont = new ControllerFruit();	
+    cont.loadGame();
+   System.out.println(cont.getHighScore()+"   "+cont.getScore()+"   "+cont.getLives());
 }
 }

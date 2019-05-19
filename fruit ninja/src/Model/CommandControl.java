@@ -6,7 +6,7 @@ public class CommandControl {
     public void setCommand(Command command){
 
         slot=command;
-
+     
     }
     
 	public void  buttonWasPressed(){
