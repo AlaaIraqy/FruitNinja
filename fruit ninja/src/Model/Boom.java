@@ -80,20 +80,10 @@ public class Boom implements GameObject {
 	public BufferedImage[] getBufferedImages() {
 BufferedImage[] arr = new BufferedImage[5];
 		
-		BufferedImage img = null;
-		File file =  new File("boom.png");
-		try {
-			
-			img = ImageIO.read(file);
-		} catch (IIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch(IOException e) {
-			
-		}
-		arr[0]=img;
-for(int i=1;i<3;i++) {
-	 file =  new File("boom"+i+".png");
+
+for(int i=0;i<3;i++) {
+	BufferedImage img =null ;
+	File file =  new File("boom-"+i+".png");
 	try {
 		
 		img = ImageIO.read(file);

@@ -3,20 +3,19 @@ package Controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import Model.Boom;
-import Model.GameObject;
-import Model.GameObjectFactory;
-import Model.IGameStrategy;
-import Model.SpecialFruit;
+import Model.*;
+
 
 public class ControllerFruit implements GameActions{
    List<GameObject> fruit  = new ArrayList<GameObject>();
    SpecialFruit Special;
    IGameStrategy strategy;
     int score=0;
+    int highScore;
     int listCount=0;
     int lives = 3;
     int j;
+    CommandControl control = new CommandControl();
     Random rand=new Random();
     boolean valid;
 	@Override
@@ -60,7 +59,6 @@ public class ControllerFruit implements GameActions{
 			else if(fruit.get(i) instanceof Boom){
 				lives--;
 				score--;
-				System.out.println("hye");
 			}
 		score++;
 			return true;
@@ -73,13 +71,13 @@ public class ControllerFruit implements GameActions{
 	@Override
 	public void saveGame() {
 		// TODO Auto-generated method stub
-		
+		control.setCommand(new SaveGameCommand(new Save(getScore(),getHighScore(),getLives())));
 	}
 
 	@Override
 	public void loadGame() {
 		// TODO Auto-generated method stub
-		
+		control.setCommand(new LoadGameCommand(new Load(getScore(),getHighScore(),getLives())));
 	}
 
 	@Override
@@ -122,4 +120,21 @@ public void setLives(int lives) {
 public void setStrategy(IGameStrategy strategy){
 	this.strategy = strategy;
 }
+
+public void setScore(int newscore) {
+	score = newscore;
+	
+}
+
+@Override
+public int getHighScore() {
+	return highScore;
+}
+
+@Override
+public void setHighScore(int highScore) {
+	this.highScore = highScore;
+	
+}
+
 }

@@ -5,6 +5,8 @@ import Controller.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.prism.paint.Color;
+
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -32,6 +34,7 @@ public class Game1 extends Application {
 	double mouseX;
 	double mouseY;
 	int random;
+	int timing=0;
 	// int lives = 3;
 	// int score = 0;
 	ImageView swordiv;
@@ -39,6 +42,7 @@ public class Game1 extends Application {
 	// double falling;
 	Label lblscore;
 	Label lblmissed;
+	Label lbltimer;
 
 	// int missed = 0;
 	Timeline timeline;
@@ -47,7 +51,7 @@ public class Game1 extends Application {
 	Gameoversubscene gameover = new Gameoversubscene();
 
 	GameActions controller = new ControllerFruit();
-
+	long start = System.currentTimeMillis();
 	public static void main(String[] args) {
 		launch();
 
@@ -69,16 +73,23 @@ public class Game1 extends Application {
 		lblscore.setFont(new Font("Arial", 40));
 		lblscore.setLayoutX(10);
 		lblscore.setLayoutY(10);
+		lblscore.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
 		lblmissed = new Label("Lives: " + controller.getLives());
 		lblmissed.setFont(new Font("Arial", 40));
-		lblmissed.setLayoutX(850);
+		lblmissed.setLayoutX(830);
 		lblmissed.setLayoutY(10);
+		lblmissed.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
+		 lbltimer = new Label("Time: "+timing);
+		lbltimer.setFont(new Font("Arial", 40));
+		lbltimer.setLayoutX(10);
+		lbltimer.setLayoutY(100);
+		lbltimer.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #0000ff);-fx-border-color:black; -fx-padding:4px;");
 		// missed = 0;
 
 		// speed = 0.2;
 		// falling = 500;
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
-
+            
 			controller.createGameObject();
 
 			controller.getObjectList().get(controller.getListCount() - 1).setCutFlag(true);
@@ -95,7 +106,7 @@ public class Game1 extends Application {
 			strategy.updateSpeed();
 
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
-
+           timing++;
 		}));
 
 		timeline.setCycleCount(1000);
@@ -114,7 +125,7 @@ public class Game1 extends Application {
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, lblscore, lblmissed);
+		root.getChildren().addAll(swordiv, lblscore, lblmissed,lbltimer);
 
 		Scene scene = new Scene(root, 1000, 600);
 
@@ -137,7 +148,14 @@ public class Game1 extends Application {
 	}
 
 	public void gameUpdate() {
-
+	
+		long finish=0;
+	
+		if(controller.getLives()!=0) {
+	     finish = System.currentTimeMillis();
+		}
+	     long timeElapsed = finish - start;
+		lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000.0));
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();

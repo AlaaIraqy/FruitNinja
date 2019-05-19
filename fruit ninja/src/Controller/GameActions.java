@@ -43,4 +43,7 @@ public void setLives(int i);
 public int getLives();
 public boolean hasMovedOfScreenBoundary(int i);
 public void setStrategy(IGameStrategy strategy);
+public void setScore(int newscore);
+public int getHighScore();
+public void setHighScore(int highScore);
 }
