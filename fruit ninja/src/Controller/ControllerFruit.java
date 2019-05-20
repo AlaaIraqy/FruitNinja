@@ -20,14 +20,17 @@ public class ControllerFruit implements GameActions{
    List<GameObject> fruit  = new ArrayList<GameObject>();
    public ArrayList<Integer> gameData = new ArrayList<Integer>();
    SpecialFruit Special;
+   SpecialBomb SpecialBomb;
    IGameStrategy strategy;
     int score=0;
     int highScore=0;
     int listCount=0;
     int lives = 3;
     int j;
+    int k;
     CommandControl control = new CommandControl();
     Random rand=new Random();
+    Random specialRand=new Random();
     boolean valid;
 	@Override
 	public void createGameObject() {
@@ -40,16 +43,31 @@ public class ControllerFruit implements GameActions{
 			listCount=fruit.size();
 		}
 		else{
+			k=specialRand.nextInt(2);
+			if(k==0){
+			fruitObject = factory.createFruit();
+				if(fruitObject instanceof Boom){
+					fruit.add(fruitObject);
+					listCount=fruit.size();
+			}
+				else{
+					Special= new SpecialFruit(fruitObject);
+					fruit.add(Special);
+					listCount=fruit.size();
+			}
+		  }
+			else{
 			fruitObject = factory.createFruit();
 			if(fruitObject instanceof Boom){
+			SpecialBomb=new SpecialBomb(fruitObject);
+			fruit.add(SpecialBomb);
+			listCount=fruit.size();
+			}
+			else{
 				fruit.add(fruitObject);
 				listCount=fruit.size();
 			}
-			else{
-				Special= new SpecialFruit(fruitObject);
-				fruit.add(Special);
-				listCount=fruit.size();
-			}
+		  }
 		}
 	}
 
@@ -66,6 +84,9 @@ public class ControllerFruit implements GameActions{
 			if(fruit.get(i) instanceof SpecialFruit) {
 				score = score+1;
 		        strategy.setSpeed(0.01);
+			}
+			else if(fruit.get(i) instanceof SpecialBomb){
+				lives=0;
 			}
 			else if(fruit.get(i) instanceof Boom){
 				lives--;

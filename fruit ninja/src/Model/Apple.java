@@ -7,7 +7,6 @@ import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 public class Apple  extends Fruit{
 //	Sword swrd = Sword.getInstance();
-	
    public BufferedImage[] getBufferedImages() {
 		BufferedImage[] arr = new BufferedImage[5];
 		
