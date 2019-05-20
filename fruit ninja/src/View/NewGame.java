@@ -1,0 +1,90 @@
+package View;
+import javafx.animation.TranslateTransition;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class NewGame {
+	Scene scene;
+	Stage stage;
+	MainMenu mainmenu;
+	ClassicMode arcadeGame;
+	
+	public NewGame(Stage stage) {
+		this.stage=stage;
+	}
+	
+	
+	public void PrepareScene() {
+		fxxxbutton bt1 = new fxxxbutton("Classic");
+		//bt1.setShape(new Circle(1.5));
+		//bt1.setMinSize(100,100);
+		//bt1.setStyle("-fx-background-color: Yellow");
+		 TranslateTransition translate3 = new TranslateTransition();  
+	      translate3.setByX(400);
+		  translate3.setByY(150);
+		  translate3.setDuration(Duration.seconds(1.5));
+		  translate3.setNode(bt1); 
+		  translate3.play();
+		
+		bt1.setOnAction(m->{
+			stage.setScene(arcadeGame.getScene());
+		});
+		
+		
+		fxxxbutton bt2 = new fxxxbutton("Arcade");
+		//bt2.setShape(new Circle(1.5));
+		//bt2.setMinSize(100,100);
+	    //bt2.setStyle("-fx-background-color: Blue");
+	    TranslateTransition translate2 = new TranslateTransition();  
+	      translate2.setByX(200);
+		  translate2.setByY(300);
+		  translate2.setDuration(Duration.seconds(1.5));
+		  translate2.setNode(bt2); 
+		  translate2.play();
+	    
+        bt2.setOnAction(m->{
+			
+		});
+        
+        fxxxbutton bt3 = new fxxxbutton("Back");
+		//bt3.setShape(new Circle(1.5));
+		//bt3.setMinSize(100,100);
+		 //bt3.setStyle("-fx-background-color: Purple");
+		 
+		  TranslateTransition translate = new TranslateTransition();  
+		  translate.setByY(450);
+		  translate.setDuration(Duration.seconds(1.5));
+		  translate.setNode(bt3); 
+		
+		  translate.play();  
+		  
+		 
+		 
+        bt3.setOnAction(m->{
+			stage.setScene(mainmenu.getScene());
+		});
+		
+		
+        
+       Pane root = new Pane();  
+       String background="-fx-background-image: url('file:backgroundMain.png');";
+       root.setStyle(background);
+        root.getChildren().addAll(bt2,bt1,bt3);  
+           	 scene=new Scene(root,1000,600);
+	}
+	
+	public Scene getScene() {
+		return scene;
+	}
+	
+	public void SetMainMenu(MainMenu mainmenu) {
+		this.mainmenu=mainmenu;
+	}
+	
+	public void SetArcadeGame(ClassicMode arcadeGame) {
+		this.arcadeGame=arcadeGame;
+	}
+}

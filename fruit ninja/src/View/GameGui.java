@@ -26,12 +26,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Game1 extends Application {
-
+public class GameGui  {
+    Stage stage;
+    Scene scene;
+    ClassicMode classicMode;
 	AnimationTimer timer;
 	Pane root = new Pane();
 	List<ImageView> drop = new ArrayList<>();
-	IGameStrategy strategy = new Difficult();
+	IGameStrategy strategy;
 //	List<GameObject> dropFruit = new ArrayList<>();
 	double mouseX;
 	double mouseY;
@@ -48,10 +50,12 @@ public class Game1 extends Application {
 
 	// int missed = 0;
 	Timeline timeline;
-
+    public GameGui(Stage stage) {
+    	this.stage = stage;
+    }
 	GameObject fruit;
 	Gameoversubscene gameover = new Gameoversubscene();
-	Media intro = new Media(new File("intro.mp3").toURI().toString()); 
+	 Media intro = new Media(new File("intro.mp3").toURI().toString()); 
 	 MediaPlayer introPlayer = new MediaPlayer(intro); 
 	 Media GameOver = new Media(new File("GameOver.mp3").toURI().toString()); 
 	 MediaPlayer GameOverPlayer = new MediaPlayer(GameOver); 
@@ -61,13 +65,7 @@ public class Game1 extends Application {
 	 MediaPlayer boomPlayer = new MediaPlayer(boom); 
 	GameActions controller = ControllerFruit.getInstance();
 	long start = System.currentTimeMillis();
-	public static void main(String[] args) {
-		launch();
-
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void prepareScene()  {
 		introPlayer.play();
 //	    dropFruit = controller.getObjectList();
 		controller.setStrategy(strategy);
@@ -137,7 +135,7 @@ public class Game1 extends Application {
 
 		root.getChildren().addAll(swordiv, lblscore, lblmissed,lbltimer);
 
-		Scene scene = new Scene(root, 1000, 600);
+	    scene = new Scene(root, 1000, 600);
 
 		scene.setCursor(Cursor.NONE);
 
@@ -147,9 +145,6 @@ public class Game1 extends Application {
 			mouseY = e.getY();
 
 		});
-
-		primaryStage.setScene(scene);
-		primaryStage.show();
 
 	}
 
@@ -165,7 +160,7 @@ public class Game1 extends Application {
 	     finish = System.currentTimeMillis();
 		}
 	     long timeElapsed = finish - start;
-		lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000.0));
+		lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000));
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();
@@ -261,4 +256,17 @@ public class Game1 extends Application {
 	}
 
 }
+
+	public Scene getScene() {
+		return scene;
+	}
+
+	public void setClassicMode(ClassicMode classicMode) {
+		this.classicMode = classicMode;
+	}
+
+	public void setStrategy(IGameStrategy strategy) {
+		this.strategy = strategy;
+	}
+	
 }
