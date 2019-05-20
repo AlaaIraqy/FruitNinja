@@ -2,12 +2,9 @@ package View;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 public class NewGame {
 	Scene scene;
 	Stage stage;
@@ -26,7 +23,7 @@ public class NewGame {
 		//bt1.setStyle("-fx-background-color: Yellow");
 		 TranslateTransition translate3 = new TranslateTransition();  
 	      translate3.setByX(400);
-		  translate3.setByY(150);
+		  translate3.setByY(180);
 		  translate3.setDuration(Duration.seconds(1.5));
 		  translate3.setNode(bt1); 
 		  translate3.play();
@@ -43,8 +40,8 @@ public class NewGame {
 		//bt2.setMinSize(100,100);
 	    //bt2.setStyle("-fx-background-color: Blue");
 	    TranslateTransition translate2 = new TranslateTransition();  
-	      translate2.setByX(200);
-		  translate2.setByY(300);
+	      translate2.setByX(400);
+		  translate2.setByY(270);
 		  translate2.setDuration(Duration.seconds(1.5));
 		  translate2.setNode(bt2); 
 		  translate2.play();
@@ -59,7 +56,8 @@ public class NewGame {
 		 //bt3.setStyle("-fx-background-color: Purple");
 		 
 		  TranslateTransition translate = new TranslateTransition();  
-		  translate.setByY(450);
+		  translate.setByX(400);
+		  translate.setByY(350);
 		  translate.setDuration(Duration.seconds(1.5));
 		  translate.setNode(bt3); 
 		

@@ -28,7 +28,7 @@ public class ClassicMode {
 		//bt1.setStyle("-fx-background-color: Yellow");
 		
 		 TranslateTransition translate3 = new TranslateTransition();  
-	      translate3.setByX(600);
+	      translate3.setByX(400);
 		  translate3.setByY(150);
 		  translate3.setDuration(Duration.seconds(1.5));
 		  translate3.setNode(bt1); 
@@ -48,7 +48,7 @@ public class ClassicMode {
 	    //bt2.setStyle("-fx-background-color: Blue");
 	    TranslateTransition translate2 = new TranslateTransition();  
 	      translate2.setByX(400);
-		  translate2.setByY(250);
+		  translate2.setByY(230);
 		  translate2.setDuration(Duration.seconds(1.5));
 		  translate2.setNode(bt2); 
 		  translate2.play();
@@ -66,8 +66,8 @@ public class ClassicMode {
 		// bt3.setStyle("-fx-background-color: Purple");
 		 
 		  TranslateTransition translate = new TranslateTransition();  
-		  translate.setByX(200);
-		  translate.setByY(400);
+		  translate.setByX(400);
+		  translate.setByY(310);
 		  translate.setDuration(Duration.seconds(1.5));
 		  translate.setNode(bt3); 
 		
@@ -87,8 +87,9 @@ public class ClassicMode {
      	//	bt4.setMinSize(100,100);
      		// bt4.setStyle("-fx-background-color: Purple");
      		 
-     		  TranslateTransition translate4 = new TranslateTransition();  
-     		  translate4.setByY(500);
+     		  TranslateTransition translate4 = new TranslateTransition(); 
+     		  translate4.setByX(400);
+     		  translate4.setByY(390);
      		  translate4.setDuration(Duration.seconds(1.5));
      		  translate4.setNode(bt4); 
      		
