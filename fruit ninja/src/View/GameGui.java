@@ -4,7 +4,9 @@ import Model.*;
 import Controller.*;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -20,7 +22,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -37,18 +42,24 @@ public class GameGui  {
 	double mouseY;
 	int random;
 	int timing=0;
+	int mins = 0, secs = 0, millis = 0;
 	// int lives = 3;
 	// int score = 0;
 	ImageView swordiv;
 	// double speed;
 	// double falling;
+	Text score;
 	Label lblscore;
 	Label lblmissed;
 	Label lblscore2;
-	Label lbltimer;
+	Text lbltimer;
+	Text BestScore;
 	ImageView heartiv0;
 	ImageView heartiv1;
 	ImageView heartiv2;
+	ImageView Score;
+	ImageView time;
+	long timeElapsed=0;
 	// int missed = 0;
 	Timeline timeline;
     public GameGui(Stage stage) {
@@ -67,41 +78,61 @@ public class GameGui  {
 	GameActions controller = ControllerFruit.getInstance();
 	long start = System.currentTimeMillis();
 	public void prepareScene()  {
+		score=new Text("0");
+		score.setFill(Color.ORANGE);
+		score.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
+		score.setLayoutX(70);
+		score.setLayoutY(50);
+		BestScore=new Text("Best Score:");
+		BestScore.setFill(Color.ORANGE);
+		BestScore.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
+		BestScore.setLayoutX(800);
+		BestScore.setLayoutY(90);
 		introPlayer.play();
 		Image heart = new Image("file:heart.png");
+		Image scorre=new Image("file:scoree.png");
+		Image timee=new Image("file:timer.png");
 		 heartiv0 = new ImageView(heart);
 		 heartiv1=new ImageView(heart);
 		 heartiv2=new ImageView(heart);
+		 Score=new ImageView(scorre);
+		 time=new ImageView(timee);
 		heartiv0.setLayoutX(800);
 		heartiv0.setLayoutY(10);
 		heartiv1.setLayoutX(860);
 		heartiv1.setLayoutY(10);
 		heartiv2.setLayoutX(920);
 		heartiv2.setLayoutY(10);
+		Score.setLayoutX(20);
+		Score.setLayoutY(10);
+		time.setLayoutX(20);
+		time.setLayoutY(80);
+		lbltimer = new Text("00:00");
+		lbltimer.setFill(Color.ORANGE);
+		lbltimer.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
+		lbltimer.setLayoutX(70);
+		lbltimer.setLayoutY(120);
 //	    dropFruit = controller.getObjectList();
 		controller.setStrategy(strategy);
 		String background = "-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
-		root.getChildren().addAll(gameover,heartiv0,heartiv1,heartiv2);
+		root.getChildren().addAll(gameover,heartiv0,heartiv1,heartiv2,Score,time,BestScore);
 		Image sword = new Image("sword.png");
 		swordiv = new ImageView(sword);
 		swordiv.setFitHeight(160);
 		swordiv.setFitWidth(100);
-		lblscore = new Label("Score: 0");
-		lblscore.setFont(new Font("Arial", 40));
-		lblscore.setLayoutX(10);
-		lblscore.setLayoutY(10);
-		lblscore.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
+//		lblscore = new Label("Score: 0");
+//		lblscore.setFont(new Font("Arial", 40));
+//		lblscore.setLayoutX(10);
+//		lblscore.setLayoutY(10);
+	//	lblscore.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
 //		lblmissed = new Label("Lives: " + controller.getLives());
 //		lblmissed.setFont(new Font("Arial", 40));
 //		lblmissed.setLayoutX(830);
 //		lblmissed.setLayoutY(10);
 //		lblmissed.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
-		lbltimer = new Label("Time: "+timing);
-		lbltimer.setFont(new Font("Arial", 40));
-		lbltimer.setLayoutX(10);
-		lbltimer.setLayoutY(100);
-		lbltimer.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #0000ff);-fx-border-color:black; -fx-padding:4px;");
+		
+		//lbltimer.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #0000ff);-fx-border-color:black; -fx-padding:4px;");
 		// missed = 0;
 		// speed = 0.2;
 		// falling = 500;
@@ -141,7 +172,7 @@ public class GameGui  {
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, lblscore,lbltimer);
+		root.getChildren().addAll(swordiv, score,lbltimer);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -166,15 +197,19 @@ public class GameGui  {
 	
 		if(controller.getLives()!=0) {
 	     finish = System.currentTimeMillis();
-	     long timeElapsed = finish - start;
-		lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000));
+	     timeElapsed = finish - start;
+	     timeElapsed=(timeElapsed/1000)-(mins*60);
+	     lbltimer=change(lbltimer);
+		//lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000));
 		}
+		
+		
+		
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();
 		swrd.setPositionX(mouseX);
 		swrd.setPositionY(mouseY);
-
 		for (int i = 0; i < drop.size(); i++) {
 			controller.getObjectList().get(i).setXlocation(drop.get(i).getLayoutX());
 			controller.getObjectList().get(i).setYlocation(drop.get(i).getLayoutY());
@@ -188,7 +223,7 @@ public class GameGui  {
 			if (controller.sliceObjects(i) == true) {
 				splatterPlayer.play();
 				controller.getObjectList().get(i).setCutFlag(false);
-				lblscore.setText("Score: " + String.valueOf(controller.getScore()));
+				score.setText(String.valueOf(controller.getScore()));
 				Image cutFruit = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[1], null);
 				Image cutFruit1 = SwingFXUtils.toFXImage(controller.getObjectList().get(i).getBufferedImages()[2],null);
 				ImageView cutFruitiv = new ImageView(cutFruit1);
@@ -289,7 +324,20 @@ public class GameGui  {
 	}
 
 }
+	Text change(Text lbltimer) {
 
+
+		if(timeElapsed == 60) {
+			mins++;
+
+		}
+	//	lbltimer.setText(mins+":"+timeElapsed);
+//
+		lbltimer.setText((((mins/10) == 0) ? "0" : "") + mins + ":"
+
+	 + (((timeElapsed/10) == 0) ? "0" : "") + timeElapsed ); 
+		return lbltimer;
+	}
 	public Scene getScene() {
 		return scene;
 	}
