@@ -6,12 +6,10 @@ import Controller.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -46,8 +44,11 @@ public class GameGui  {
 	// double falling;
 	Label lblscore;
 	Label lblmissed;
+	Label lblscore2;
 	Label lbltimer;
-
+	ImageView heartiv0;
+	ImageView heartiv1;
+	ImageView heartiv2;
 	// int missed = 0;
 	Timeline timeline;
     public GameGui(Stage stage) {
@@ -67,14 +68,23 @@ public class GameGui  {
 	long start = System.currentTimeMillis();
 	public void prepareScene()  {
 		introPlayer.play();
+		Image heart = new Image("file:heart.png");
+		 heartiv0 = new ImageView(heart);
+		 heartiv1=new ImageView(heart);
+		 heartiv2=new ImageView(heart);
+		heartiv0.setLayoutX(800);
+		heartiv0.setLayoutY(10);
+		heartiv1.setLayoutX(860);
+		heartiv1.setLayoutY(10);
+		heartiv2.setLayoutX(920);
+		heartiv2.setLayoutY(10);
 //	    dropFruit = controller.getObjectList();
 		controller.setStrategy(strategy);
 		String background = "-fx-background-image: url('file:background.png');";
 		root.setStyle(background);
-		root.getChildren().add(gameover);
+		root.getChildren().addAll(gameover,heartiv0,heartiv1,heartiv2);
 		Image sword = new Image("sword.png");
 		swordiv = new ImageView(sword);
-
 		swordiv.setFitHeight(160);
 		swordiv.setFitWidth(100);
 		lblscore = new Label("Score: 0");
@@ -82,18 +92,17 @@ public class GameGui  {
 		lblscore.setLayoutX(10);
 		lblscore.setLayoutY(10);
 		lblscore.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
-		lblmissed = new Label("Lives: " + controller.getLives());
-		lblmissed.setFont(new Font("Arial", 40));
-		lblmissed.setLayoutX(830);
-		lblmissed.setLayoutY(10);
-		lblmissed.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
-		 lbltimer = new Label("Time: "+timing);
+//		lblmissed = new Label("Lives: " + controller.getLives());
+//		lblmissed.setFont(new Font("Arial", 40));
+//		lblmissed.setLayoutX(830);
+//		lblmissed.setLayoutY(10);
+//		lblmissed.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #ff0000);-fx-border-color:black; -fx-padding:4px;");
+		lbltimer = new Label("Time: "+timing);
 		lbltimer.setFont(new Font("Arial", 40));
 		lbltimer.setLayoutX(10);
 		lbltimer.setLayoutY(100);
 		lbltimer.setStyle("-fx-text-fill: white;-fx-background-color: linear-gradient(#E4EAA2, #0000ff);-fx-border-color:black; -fx-padding:4px;");
 		// missed = 0;
-
 		// speed = 0.2;
 		// falling = 500;
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
@@ -113,6 +122,7 @@ public class GameGui  {
 
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
            timing++;
+		//	root.getChildren().remove(lblscore2);
 		}));
 
 		timeline.setCycleCount(1000);
@@ -131,7 +141,7 @@ public class GameGui  {
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, lblscore, lblmissed,lbltimer);
+		root.getChildren().addAll(swordiv, lblscore,lbltimer);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -172,7 +182,8 @@ public class GameGui  {
 					+ ((ImageView) drop.get(i)).getLayoutY() / 150);
 			controller.setLives(controller.getLives());
 			if (controller.getLives() > 0){
-				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+				
+			//	lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 			}
 			if (controller.sliceObjects(i) == true) {
 				splatterPlayer.play();
@@ -203,15 +214,23 @@ public class GameGui  {
 					boomPlayer.play();
 					controller.setLives(controller.getLives());
 					if (controller.getLives() >= 0){
-						lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+						//lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 					}
 					boomPlayer.stop();
 				}
 				else if (controller.getObjectList().get(i) instanceof SpecialBomb){
 					boomPlayer.play();
 					controller.setLives(controller.getLives());
-				    lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+				 //   lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 					boomPlayer.stop();
+				}
+				else if(controller.getObjectList().get(i) instanceof Pineapple){
+					lblscore2 = new Label("Score X 2");
+					lblscore2.setFont(new Font("Arial", 100));
+					lblscore2.setLayoutX(200);
+					lblscore2.setLayoutY(150);
+					lblscore2.setStyle("-fx-text-fill: white;");
+					//root.getChildren().add(lblscore2);
 				}
 				root.getChildren().add(cutFruitiv);
 //				System.out.println("AFTER SLICE "+ i + "__" + controller.getObjectList().get(i));
@@ -231,6 +250,7 @@ public class GameGui  {
 				// root.getChildren().remove(drop.get(i));
 
 				controller.getObjectList().remove(i);
+				
 				// root.getChildren().add(drop.get(i));
 
 				drop.remove(i);
@@ -238,7 +258,7 @@ public class GameGui  {
 				// missed--;
 
 			}
-
+            
 			// if missed remove
 			else if (controller.hasMovedOfScreenBoundary(i)) {
 				root.getChildren().remove(((ImageView) drop.get(i)));
@@ -247,16 +267,25 @@ public class GameGui  {
 				controller.setLives(controller.getLives());
 			}
 			if (controller.getLives() == 0) {
+				root.getChildren().removeAll(heartiv2,heartiv1,heartiv0);
 				introPlayer.stop();
 				GameOverPlayer.play();
 				gameover.moveSubscene();
-				lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
+				//lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 				for (int k = 0; k < drop.size(); k++) {
 					root.getChildren().remove(drop.get(k));
 				}
 				drop.clear();
 				timeline.pause();
 			}
+			if (controller.getLives() > 0){
+				if(controller.getLives()==1){
+					root.getChildren().remove(heartiv1);
+				}
+				else if(controller.getLives()==2){
+					root.getChildren().remove(heartiv0);
+				}
+		}
 	}
 
 }
