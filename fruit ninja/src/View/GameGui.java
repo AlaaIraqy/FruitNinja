@@ -166,9 +166,9 @@ public class GameGui  {
 	
 		if(controller.getLives()!=0) {
 	     finish = System.currentTimeMillis();
-		}
 	     long timeElapsed = finish - start;
 		lbltimer.setText("Time: "+String.valueOf(timeElapsed/1000));
+		}
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
 		Sword swrd = Sword.getInstance();
