@@ -55,7 +55,7 @@ public class GameGui  {
     }
 	GameObject fruit;
 	Gameoversubscene gameover = new Gameoversubscene();
-	 Media intro = new Media(new File("intro.mp3").toURI().toString()); 
+	 Media intro = new Media(new File("intro (2).mp3").toURI().toString()); 
 	 MediaPlayer introPlayer = new MediaPlayer(intro); 
 	 Media GameOver = new Media(new File("GameOver.mp3").toURI().toString()); 
 	 MediaPlayer GameOverPlayer = new MediaPlayer(GameOver); 

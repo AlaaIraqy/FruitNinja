@@ -22,10 +22,8 @@ public  class Main extends Application{
 		classicGame.setGamegui(gamegui);
 		
 		mainmenu.PrepareScene();
-		newGame.PrepareScene();
-		classicGame.PrepareScene();
 		
-
+	
 		
 		primaryStage.setScene(mainmenu.getScene());
 		primaryStage.show();

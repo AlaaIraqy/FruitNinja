@@ -5,6 +5,8 @@ import Model.Medium;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -14,7 +16,7 @@ public class ClassicMode {
 	Stage stage;
 	GameGui gamegui;
 	NewGame newGame;
-	
+	MediaPlayer intro;
 	public ClassicMode(Stage stage) {
 		this.stage=stage;
 	}
@@ -33,6 +35,7 @@ public class ClassicMode {
 		  translate3.play();
 		
 		bt1.setOnAction(m->{
+			intro.stop();
 	          gamegui.setStrategy(new Easy());
 	          gamegui.prepareScene();
 	          stage.setScene(gamegui.getScene());
@@ -51,7 +54,8 @@ public class ClassicMode {
 		  translate2.play();
 	    
         bt2.setOnAction(m->{
-        	  gamegui.setStrategy(new Medium());
+        	intro.stop();
+        	gamegui.setStrategy(new Medium());
         	  gamegui.prepareScene();
         	  stage.setScene(gamegui.getScene());
 		});
@@ -72,6 +76,7 @@ public class ClassicMode {
 		 
 		 
         bt3.setOnAction(m->{
+        	intro.stop();
         	  gamegui.setStrategy(new Difficult());
         	  gamegui.prepareScene();
         	  stage.setScene(gamegui.getScene());
@@ -92,6 +97,7 @@ public class ClassicMode {
      		 
      		 
              bt4.setOnAction(m->{
+            	 intro.stop();
             	 stage.setScene(newGame.getScene());
      			
      		});
@@ -116,5 +122,8 @@ public class ClassicMode {
 	public void setGamegui(GameGui gamegui) {
 		this.gamegui = gamegui;
 		
+	}
+	public void setIntro(MediaPlayer intro) {
+		this.intro=intro;
 	}
 }

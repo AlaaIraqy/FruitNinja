@@ -2,6 +2,8 @@ package View;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -11,7 +13,7 @@ public class NewGame {
 	Stage stage;
 	MainMenu mainmenu;
 	ClassicMode arcadeGame;
-	
+	MediaPlayer intro;
 	public NewGame(Stage stage) {
 		this.stage=stage;
 	}
@@ -30,6 +32,8 @@ public class NewGame {
 		  translate3.play();
 		
 		bt1.setOnAction(m->{
+			arcadeGame.setIntro(intro);
+			arcadeGame.PrepareScene();
 			stage.setScene(arcadeGame.getScene());
 		});
 		
@@ -87,4 +91,10 @@ public class NewGame {
 	public void SetArcadeGame(ClassicMode arcadeGame) {
 		this.arcadeGame=arcadeGame;
 	}
+
+
+	public void setIntro(MediaPlayer intro) {
+		this.intro = intro;
+	}
+	
 }

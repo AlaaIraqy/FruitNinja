@@ -1,5 +1,7 @@
 package View;
 import java.awt.Color;
+import java.io.File;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
@@ -14,6 +16,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -21,12 +25,22 @@ public class MainMenu {
 	Scene scene;
 	Stage stage;
 	NewGame newGame;
-	
+	Media intro = new Media(new File("intro (2).mp3").toURI().toString()); 
+	 MediaPlayer introPlayer = new MediaPlayer(intro); 
+	public MediaPlayer getIntroPlayer() {
+		return introPlayer;
+	}
+
+	public void setIntroPlayer(MediaPlayer introPlayer) {
+		this.introPlayer = introPlayer;
+	}
+
 	public MainMenu(Stage stage) {
 		this.stage=stage;
 	}
 	
 	public void PrepareScene() {
+		introPlayer.play();
 		fxxxbutton bt1 = new fxxxbutton("New Game");
 		//bt1.setShape(new Circle(1.5));
 		//bt1.setMinSize(100,100);
@@ -39,7 +53,10 @@ public class MainMenu {
 		  translate3.play();
 		
 		bt1.setOnAction(m->{
+		    newGame.setIntro(introPlayer);
+		    newGame.PrepareScene();
 			stage.setScene(newGame.getScene());
+	
 		});
 		
 		
