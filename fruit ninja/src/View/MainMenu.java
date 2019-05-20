@@ -38,7 +38,6 @@ public class MainMenu {
 	public MainMenu(Stage stage) {
 		this.stage=stage;
 	}
-	
 	public void PrepareScene() {
 		introPlayer.play();
 		fxxxbutton bt1 = new fxxxbutton("New Game");

@@ -10,7 +10,12 @@ public class GameObjectFactory {
     	  Random rand  = new Random();
     	  if(j==1) {
     		  return new Boom();
-    	  }else {
+    		  
+    	  }
+    	  else if(j==2){
+    		  return new Pineapple();
+		  }
+    	  else {
     	  i = rand.nextInt(5);
     	  if(i==0) {
     		  return new Apple();}
@@ -21,12 +26,12 @@ public class GameObjectFactory {
     		   return new Basaha();
     	   } 
     	  else if(i==3) {
+    		  
     		   return new Peach();
     	   } 
     	  else if(i==4) {
     		   return new Sandia();
     	   } 
-    
     	  }
     	  return null;
       }

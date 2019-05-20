@@ -93,6 +93,9 @@ public class ControllerFruit implements GameActions{
 				lives--;
 				score--;
 			}
+			else if(fruit.get(i) instanceof Pineapple){
+				score=score*2;
+			}
 		score++;
 			return true;
 		}
