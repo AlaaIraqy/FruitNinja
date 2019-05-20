@@ -43,7 +43,8 @@ public class ControllerFruit implements GameActions{
 			listCount=fruit.size();
 		}
 		else{
-			k=specialRand.nextInt(2);
+			//k=specialRand.nextInt(2);
+			k=1;
 			if(k==0){
 			fruitObject = factory.createFruit();
 				if(fruitObject instanceof Boom){

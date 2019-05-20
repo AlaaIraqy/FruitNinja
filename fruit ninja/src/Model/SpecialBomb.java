@@ -18,7 +18,7 @@ public class SpecialBomb extends Boom{
 			arr[i] = Boom.getBufferedImages()[i];	
 			System.out.println("hey");
 	}
-	File file =  new File("Bomb.png");
+	File file =  new File("bomb.png");
 	
 		try {
 			img = ImageIO.read(file);

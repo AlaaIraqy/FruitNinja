@@ -99,11 +99,9 @@ public class GameGui  {
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
             
 			controller.createGameObject();
-
 			controller.getObjectList().get(controller.getListCount() - 1).setCutFlag(true);
-
 			Image fruitimg = SwingFXUtils.toFXImage(
-					controller.getObjectList().get(controller.getListCount() - 1).getBufferedImages()[0], null);
+			controller.getObjectList().get(controller.getListCount() - 1).getBufferedImages()[0], null);
 			ImageView fruitiv = new ImageView(fruitimg);
 			fruitiv.setLayoutX(rand(50, 900));
 			fruitiv.setLayoutY(1);
@@ -207,6 +205,12 @@ public class GameGui  {
 					if (controller.getLives() >= 0){
 						lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 					}
+					boomPlayer.stop();
+				}
+				else if (controller.getObjectList().get(i) instanceof SpecialBomb){
+					boomPlayer.play();
+					controller.setLives(controller.getLives());
+				    lblmissed.setText("Lives: " + String.valueOf(controller.getLives()));
 					boomPlayer.stop();
 				}
 				root.getChildren().add(cutFruitiv);

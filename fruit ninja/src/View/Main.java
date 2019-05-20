@@ -15,7 +15,6 @@ public  class Main extends Application{
 		
 		mainmenu.setNewGame(newGame);
 		newGame.SetMainMenu(mainmenu);
-		
 		newGame.SetArcadeGame(classicGame);
 		classicGame.SetNewGame(newGame);
 		

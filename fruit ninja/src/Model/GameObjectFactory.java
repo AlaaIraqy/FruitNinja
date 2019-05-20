@@ -6,7 +6,7 @@ public class GameObjectFactory {
       public GameObject createFruit() {
     	  int i;
     	  Random rand1 = new Random();
-    	  int j = rand1.nextInt(30);
+    	  int j = rand1.nextInt(20);  
     	  Random rand  = new Random();
     	  if(j==1) {
     		  return new Boom();
