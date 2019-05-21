@@ -125,7 +125,7 @@ public class ControllerFruit implements GameActions{
 		gameData.add(score);
 		gameData.add(highScore);
 		gameData.add(lives);
-		control.setCommand(new SaveGameCommand(new Save(gameData)));
+		control.setCommand(new SaveGameCommand(new Save(gameData,strategy)));
 	    control.buttonWasPressed();
 	    gameData.clear();
 	}
@@ -133,7 +133,7 @@ public class ControllerFruit implements GameActions{
 	@Override
 	public void loadGame(String choice) {
 		// TODO Auto-generated method stub
-		control.setCommand(new LoadGameCommand(new Load(gameData,choice)));
+		control.setCommand(new LoadGameCommand(new Load(gameData,choice,strategy)));
 		control.buttonWasPressed();
 		
 	}

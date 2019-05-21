@@ -57,7 +57,8 @@ public class GameGui  {
 	Button pause;
     Button resume;
     Button back=new Button("Back");
-   // fxxxbutton back = new fxxxbutton("Back");
+    Button load=new Button("load");
+    // fxxxbutton back = new fxxxbutton("Back");
 	long timeElapsed=0;
 	long sec=0;
 	long finish=0;
@@ -80,7 +81,9 @@ public class GameGui  {
 	GameActions controller = ControllerFruit.getInstance();
 	long start;
 	public void prepareScene()  {
-	start = System.currentTimeMillis();
+	
+		start = System.currentTimeMillis();
+		
 		score=new Text("0");
 		score.setFill(Color.ORANGE);
 		score.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
@@ -140,6 +143,9 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 		resume.setLayoutX(100);
 		resume.setLayoutY(500);
 		resume.setGraphic(resumeiv);
+		
+		load.setLayoutX(30);
+		load.setLayoutY(460);
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {			
 			controller.createGameObject();
 			controller.getObjectList().get(controller.getListCount() - 1).setCutFlag(true);
@@ -170,7 +176,7 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, score,lbltimer,pause,resume);
+		root.getChildren().addAll(swordiv, score,lbltimer,pause,resume,load);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -210,6 +216,9 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
     	  // finish= System.currentTimeMillis()+timeElapsed;
 		//	timeElapsed = timeElapsed + System.currentTimeMillis() - start;
     	   valid=true;    	
+       });
+       load.setOnAction(e->{
+    	   controller.loadGame("all");
        });
 	}
 
