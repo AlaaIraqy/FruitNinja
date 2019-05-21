@@ -50,7 +50,8 @@ public class MainMenu {
 		  translate3.setDuration(Duration.seconds(1.5));
 		  translate3.setNode(bt1); 
 		  translate3.play();
-		
+ 		  System.out.println("audio");
+
 		bt1.setOnAction(m->{
 		    newGame.setIntro(introPlayer);
 		    newGame.PrepareScene();

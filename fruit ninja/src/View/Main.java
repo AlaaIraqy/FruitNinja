@@ -24,7 +24,8 @@ public  class Main extends Application{
 	     gamegui.setNewgame(newGame);
 		classicGame.setGamegui(gamegui);
 		
-		
+		  System.out.println("audio");
+
 		mainmenu.PrepareScene();
 		
 	

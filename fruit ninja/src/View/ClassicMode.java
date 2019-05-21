@@ -94,7 +94,7 @@ public class ClassicMode {
      		  translate4.setNode(bt4); 
      		
      		  translate4.play();  
-     		  
+     		  System.out.println("audio");
      		 
      		 
              bt4.setOnAction(m->{

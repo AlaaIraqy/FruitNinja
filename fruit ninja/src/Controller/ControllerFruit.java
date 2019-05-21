@@ -157,7 +157,7 @@ public class ControllerFruit implements GameActions{
 		if(valid==true&&fruit.get(i) instanceof Boom) {
 			
 		}
-		else if(valid==true){
+		else if(valid==true&&(!(strategy instanceof Arcade))){
 			lives--;
 		}
 		return valid;

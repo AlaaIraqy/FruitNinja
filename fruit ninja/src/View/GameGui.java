@@ -247,7 +247,8 @@ public class GameGui  {
 					objeffect.setNode(effectiv);
 					objeffect.setToY(1000);
 					objeffect.play();
-					splatterPlayer.stop();
+			splatterPlayer.stop();
+
 
 				}
 				else if (controller.getObjectList().get(i) instanceof Boom){
@@ -286,11 +287,12 @@ public class GameGui  {
 				root.getChildren().remove(((ImageView) drop.get(i)));
 				drop.remove(i);
 				controller.getObjectList().remove(i);
+
 				controller.setLives(controller.getLives());
 			}
 			if (strategy instanceof Arcade){
 				
-				if(timeElapsed==10&&mins==0){
+				if(timeElapsed==0&&mins==1){
 					controller.setLives(0);
 				}
 			}
