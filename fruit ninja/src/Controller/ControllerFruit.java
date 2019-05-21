@@ -39,31 +39,46 @@ public class ControllerFruit implements GameActions{
 		j=rand.nextInt(10);
 		if(j!=0){
 			fruitObject = factory.createFruit();
+			if(strategy instanceof Arcade){
+				while(fruitObject instanceof Boom){
+					fruitObject = factory.createFruit();
+				}
+			}
 			fruit.add(fruitObject);
 			listCount=fruit.size();
 		}
 		else{
-			//k=specialRand.nextInt(2);
-			k=1;
-			if(k==0){
+			k=specialRand.nextInt(2);
+			if(k==0){	
 			fruitObject = factory.createFruit();
-				if(fruitObject instanceof Boom){
-					fruit.add(fruitObject);
-					listCount=fruit.size();
+			if(strategy instanceof Arcade){
+				while(fruitObject instanceof Boom){
+					fruitObject = factory.createFruit();
+				}
 			}
-				else{
+			 if(fruitObject instanceof Boom){
+						fruit.add(fruitObject);
+						listCount=fruit.size();
+					
+			}
+			else{
 					Special= new SpecialFruit(fruitObject);
 					fruit.add(Special);
 					listCount=fruit.size();
 			}
 		  }
 			else{
-			fruitObject = factory.createFruit();
-			if(fruitObject instanceof Boom){
+				fruitObject = factory.createFruit();
+				if(strategy instanceof Arcade){
+					while(fruitObject instanceof Boom){
+						fruitObject = factory.createFruit();
+					}
+				}
+		   if(fruitObject instanceof Boom){	
 			SpecialBomb=new SpecialBomb(fruitObject);
 			fruit.add(SpecialBomb);
 			listCount=fruit.size();
-			}
+		}
 			else{
 				fruit.add(fruitObject);
 				listCount=fruit.size();
@@ -99,7 +114,6 @@ public class ControllerFruit implements GameActions{
 		score++;
 			return true;
 		}
-
 		
 		return false;
 	}
