@@ -98,7 +98,7 @@ public class ClassicMode {
      		 
      		 
              bt4.setOnAction(m->{
-            	 intro.stop();
+            	// intro.play();
             	 stage.setScene(newGame.getScene());
      			
      		});
