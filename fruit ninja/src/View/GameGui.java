@@ -57,6 +57,7 @@ public class GameGui  {
 	Button pause;
     Button resume;
 	long timeElapsed=0;
+	long sec=0;
 	long finish=0;
 	Timeline timeline;
 	boolean valid=true;
@@ -182,15 +183,18 @@ public class GameGui  {
 			while(i<drop.size()) {
 			root.getChildren().remove(drop.get(i));
 			i++;
-			}		drop.clear();
+			}		
+			drop.clear();
 			controller.getObjectList().clear();
-	   	   start = System.currentTimeMillis();
+//			timeElapsed = System.currentTimeMillis() - start + timeElapsed; 
 			timeline.pause();
 			valid=false;
 		});
        resume.setOnAction(e->{
     	   timeline.play();
-			timeElapsed = timeElapsed + System.currentTimeMillis() - start;
+    	//   start = System.currentTimeMillis();
+    	  // finish= System.currentTimeMillis()+timeElapsed;
+		//	timeElapsed = timeElapsed + System.currentTimeMillis() - start;
     	   valid=true;    	
        });
 	}
@@ -203,10 +207,12 @@ public class GameGui  {
 		controller.loadGame("highscore");
 		BestScore.setText("Best Score:  "+String.valueOf(controller.getHighScore()));
 		if(controller.getLives()!=0&&valid==true) {
-	     finish = System.currentTimeMillis();
-	     timeElapsed = timeElapsed + finish - start;
+		 finish=System.currentTimeMillis();
+		 //finish =(((finish - start)/1000)-(mins*60))+ System.currentTimeMillis();
+	     timeElapsed =  finish - start;
 	     timeElapsed=(timeElapsed/1000)-(mins*60);
 	     lbltimer=change(lbltimer);
+	     
 		}
 		swordiv.setLayoutX(mouseX);
 		swordiv.setLayoutY(mouseY);
