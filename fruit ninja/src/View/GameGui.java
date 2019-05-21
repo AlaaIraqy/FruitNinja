@@ -241,7 +241,8 @@ public class GameGui  {
 					objeffect.setNode(effectiv);
 					objeffect.setToY(1000);
 					objeffect.play();
-					splatterPlayer.stop();
+			splatterPlayer.stop();
+
 
 				}
 				else if (controller.getObjectList().get(i) instanceof Boom){
