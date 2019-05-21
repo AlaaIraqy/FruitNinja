@@ -16,9 +16,10 @@ public class NewGame {
 	public NewGame(Stage stage) {
 		this.stage=stage;
 	}
+	
+	
 	public void PrepareScene() {
 		fxxxbutton bt1 = new fxxxbutton("Classic");
-
 		//bt1.setShape(new Circle(1.5));
 		//bt1.setMinSize(100,100);
 		//bt1.setStyle("-fx-background-color: Yellow");
@@ -46,11 +47,13 @@ public class NewGame {
 		  translate2.setDuration(Duration.seconds(1.5));
 		  translate2.setNode(bt2); 
 		  translate2.play();
+	    
         bt2.setOnAction(m->{
-        	intro.stop();
 			gamegui.setStrategy(new Arcade());
         	gamegui.prepareScene();
         	stage.setScene(gamegui.getScene());
+        	
+			
 		});
         
         fxxxbutton bt3 = new fxxxbutton("Back");

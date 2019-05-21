@@ -82,8 +82,7 @@ public class GameGui  {
 	long start;
 	public void prepareScene()  {
 	
-		start = System.currentTimeMillis();
-		
+		start = System.currentTimeMillis();		
 		score=new Text("0");
 		score.setFill(Color.ORANGE);
 		score.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
@@ -176,7 +175,7 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, score,lbltimer,pause,resume,load);
+		root.getChildren().addAll(swordiv, score,lbltimer,pause,resume);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -217,9 +216,7 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 		//	timeElapsed = timeElapsed + System.currentTimeMillis() - start;
     	   valid=true;    	
        });
-       load.setOnAction(e->{
-    	   controller.loadGame("all");
-       });
+  
 	}
 
 	public int rand(int min, int max) {
@@ -325,6 +322,11 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 				introPlayer.stop();
 				GameOverPlayer.play();
 				gameover.moveSubscene();
+				root.getChildren().remove(swrd);
+//				swrd.setPositionX(0);
+//				swrd.setPositionY(0);
+				scene.setCursor(Cursor.DEFAULT);
+				root.getChildren().remove(swordiv);
 				for (int k = 0; k < drop.size(); k++) {
 					root.getChildren().remove(drop.get(k));
 				}

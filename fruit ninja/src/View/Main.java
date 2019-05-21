@@ -12,16 +12,22 @@ public  class Main extends Application{
 		NewGame newGame = new NewGame(primaryStage);
 		ClassicMode classicGame = new ClassicMode(primaryStage);
 		GameGui gamegui = new GameGui(primaryStage);
+		LoadGui loadgui = new LoadGui(primaryStage);
+		Instruction instruction=new Instruction(primaryStage);
+		mainmenu.setInstruction(instruction);
 		mainmenu.setNewGame(newGame);
+		mainmenu.setLoadgui(loadgui);
 		newGame.SetMainMenu(mainmenu);
 		newGame.SetArcadeGame(classicGame);
 		newGame.setGameGui(gamegui);
 		classicGame.SetNewGame(newGame);
-		
+		loadgui.setGamegui(gamegui);
+		loadgui.setMainmenu(mainmenu);
 		gamegui.setClassicMode(classicGame);
 	     gamegui.setNewgame(newGame);
-		classicGame.setGamegui(gamegui);
-		
+	     classicGame.setGamegui(gamegui);
+		instruction.setMainmenu(mainmenu);
+//		instruction.PrepareScene();
 		mainmenu.PrepareScene();
 		
 	
