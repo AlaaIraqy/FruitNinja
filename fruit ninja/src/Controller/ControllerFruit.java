@@ -117,12 +117,9 @@ public class ControllerFruit implements GameActions{
 	}
 
 	@Override
-	public void loadGame() {
+	public void loadGame(String choice) {
 		// TODO Auto-generated method stub
-	
-	
-		
-		control.setCommand(new LoadGameCommand(new Load(gameData)));
+		control.setCommand(new LoadGameCommand(new Load(gameData,choice)));
 		control.buttonWasPressed();
 		
 	}

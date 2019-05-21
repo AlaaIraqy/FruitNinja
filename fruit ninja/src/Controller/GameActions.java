@@ -29,7 +29,7 @@ public void saveGame();
 /*
 *loads the last saved state of the game
 */
-public void loadGame();
+public void loadGame(String choice);
 /*
 *resets the game to its initial state
 */
@@ -46,4 +46,5 @@ public void setStrategy(IGameStrategy strategy);
 public void setScore(int newscore);
 public int getHighScore();
 public void setHighScore(int highScore);
+
 }

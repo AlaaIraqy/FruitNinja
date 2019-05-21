@@ -62,7 +62,7 @@ public class GameGui  {
 	ImageView time;
 	
 	Button pause;
-	fxxxbutton resume;
+    Button resume;
 	long timeElapsed=0;
 	// int missed = 0;
 	Timeline timeline;
@@ -129,13 +129,21 @@ public class GameGui  {
 		swordiv.setFitWidth(100);
 		
 		pause = new Button("");
-		resume = new fxxxbutton("resume");
+		resume = new Button("");
 		ImageView pauseiv = new ImageView(new Image("pause.png"));
 		pauseiv.setFitHeight(40);
 		pauseiv.setFitWidth(40);
 		pause.setLayoutX(30);
 		pause.setLayoutY(500);
 		pause.setGraphic(pauseiv);
+		
+		ImageView resumeiv = new ImageView(new Image("play.png"));
+		resumeiv.setFitHeight(40);
+		resumeiv.setFitWidth(40);
+		resume.setLayoutX(100);
+		resume.setLayoutY(500);
+		resume.setGraphic(resumeiv);
+		
 //		lblscore = new Label("Score: 0");
 //		lblscore.setFont(new Font("Arial", 40));
 //		lblscore.setLayoutX(10);
@@ -152,7 +160,7 @@ public class GameGui  {
 		// speed = 0.2;
 		// falling = 500;
 		timeline = new Timeline(new KeyFrame(Duration.millis(strategy.getFalling()), event -> {
-            
+			
 			controller.createGameObject();
 			controller.getObjectList().get(controller.getListCount() - 1).setCutFlag(true);
 			Image fruitimg = SwingFXUtils.toFXImage(
@@ -187,7 +195,7 @@ public class GameGui  {
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, score,lbltimer,pause);
+		root.getChildren().addAll(swordiv, score,lbltimer,pause,resume);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -207,7 +215,7 @@ public class GameGui  {
 			i++;
 			}		drop.clear();
 			controller.getObjectList().clear();
-			pausesubs.moveSubscene();
+			
 			timeline.pause();
 			
 			
@@ -226,7 +234,9 @@ public class GameGui  {
 	public void gameUpdate() {
 	
 		long finish=0;
-	
+
+		controller.loadGame("highscore");
+		BestScore.setText("Best Score:  "+String.valueOf(controller.getHighScore()));
 		if(controller.getLives()!=0) {
 	     finish = System.currentTimeMillis();
 	     timeElapsed = finish - start;
@@ -354,6 +364,7 @@ public class GameGui  {
 				}
 		}
 	}
+		controller.saveGame();
 
 }
 	Text change(Text lbltimer) {

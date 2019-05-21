@@ -14,9 +14,11 @@ public class Load {
 //	private List<Fruit> FruitsList = new ArrayList<>();
 	
 	public ArrayList<Integer> gameData= new ArrayList<>();
-	 ControllerFruit Cf = ControllerFruit.getInstance();
-	public Load(ArrayList<Integer> gameData) {
+	String choice;
+	ControllerFruit Cf = ControllerFruit.getInstance();
+	public Load(ArrayList<Integer> gameData,String choice) {
 	
+         this.choice = choice;
 		this.gameData = gameData;
 	}
 
@@ -29,10 +31,13 @@ public class Load {
 			gameData = (ArrayList)decoder.readObject();
 			decoder.close();
 			fis.close();
+			if (choice.equalsIgnoreCase("highscore"))
+				 Cf.setHighScore(gameData.get(1));
+			else {
 		    Cf.setScore(gameData.get(0));
 		    Cf.setHighScore(gameData.get(1));
 		    Cf.setLives(gameData.get(2));
-			
+			}
 				}catch(IOException ex){}
 		
 }
