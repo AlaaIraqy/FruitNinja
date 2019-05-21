@@ -12,8 +12,6 @@ public  class Main extends Application{
 		NewGame newGame = new NewGame(primaryStage);
 		ClassicMode classicGame = new ClassicMode(primaryStage);
 		GameGui gamegui = new GameGui(primaryStage);
-		
-		
 		mainmenu.setNewGame(newGame);
 		newGame.SetMainMenu(mainmenu);
 		newGame.SetArcadeGame(classicGame);
@@ -24,8 +22,6 @@ public  class Main extends Application{
 	     gamegui.setNewgame(newGame);
 		classicGame.setGamegui(gamegui);
 		
-		  System.out.println("audio");
-
 		mainmenu.PrepareScene();
 		
 	

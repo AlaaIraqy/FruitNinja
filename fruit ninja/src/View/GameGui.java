@@ -56,6 +56,8 @@ public class GameGui  {
 	ImageView time;
 	Button pause;
     Button resume;
+    Button back=new Button("Back");
+   // fxxxbutton back = new fxxxbutton("Back");
 	long timeElapsed=0;
 	long sec=0;
 	long finish=0;
@@ -104,6 +106,9 @@ public class GameGui  {
 		heartiv1.setLayoutY(10);
 		heartiv2.setLayoutX(920);
 		heartiv2.setLayoutY(10);
+back.setPrefHeight(47);
+back.setPrefWidth(100);
+back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 		Score.setLayoutX(20);
 		Score.setLayoutY(10);
 		time.setLayoutX(20);
@@ -177,7 +182,16 @@ public class GameGui  {
 			mouseY = e.getY();
 
 		});
-		
+		back.setOnAction(e->{
+			Main main=new Main();
+			try {
+				controller.ResetGame();
+				main.start(stage);
+				GameOverPlayer.stop();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		pause.setOnAction(e->{
 			int i =0;
 			while(i<drop.size()) {
@@ -291,7 +305,8 @@ public class GameGui  {
 				controller.setLives(controller.getLives());
 			}
 			if (strategy instanceof Arcade){
-				
+				root.getChildren().removeAll(heartiv2,heartiv1,heartiv0);
+				BestScore.setLayoutY(40);
 				if(timeElapsed==0&&mins==1){
 					controller.setLives(0);
 				}
@@ -304,6 +319,14 @@ public class GameGui  {
 				for (int k = 0; k < drop.size(); k++) {
 					root.getChildren().remove(drop.get(k));
 				}
+				back.setLayoutX(170);
+				back.setLayoutY(-210);
+				root.getChildren().add(back);
+				TranslateTransition backk = new TranslateTransition(); 
+				backk.setDuration(Duration.seconds(2.95));
+				backk.setToY(710);
+				backk.setNode(back);
+				backk.play();
 				drop.clear();
 				timeline.pause();
 			}

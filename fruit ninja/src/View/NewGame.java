@@ -18,7 +18,6 @@ public class NewGame {
 	}
 	public void PrepareScene() {
 		fxxxbutton bt1 = new fxxxbutton("Classic");
-		  System.out.println("audio");
 
 		//bt1.setShape(new Circle(1.5));
 		//bt1.setMinSize(100,100);

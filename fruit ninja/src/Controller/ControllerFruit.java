@@ -140,7 +140,10 @@ public class ControllerFruit implements GameActions{
 
 	@Override
 	public void ResetGame() {
-		// TODO Auto-generated method stub
+	fruit.clear();
+	lives=3;
+	score=0;
+	loadGame("highscore");
 		
 	}
 	public int getScore() {

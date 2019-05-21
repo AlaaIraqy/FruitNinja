@@ -93,18 +93,12 @@ public class ClassicMode {
      		  translate4.setDuration(Duration.seconds(1.5));
      		  translate4.setNode(bt4); 
      		
-     		  translate4.play();  
-     		  System.out.println("audio");
-     		 
-     		 
+     		  translate4.play();       		 
              bt4.setOnAction(m->{
             	// intro.play();
             	 stage.setScene(newGame.getScene());
      			
-     		});
-		
-		
-        
+     		});  
        Pane root = new Pane();  
         root.getChildren().addAll(bt4,bt3,bt2,bt1);  
         String background="-fx-background-image: url('file:backgroundMain.png');";
