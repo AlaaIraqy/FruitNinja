@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameGui  {
+	NewGame newgame;
     Stage stage;
     Scene scene;
     ClassicMode classicMode;
@@ -170,11 +171,16 @@ public class GameGui  {
 			fruitiv.setLayoutY(1);
 			drop.add(fruitiv);
 			// System.out.println(controller.getObjectList().get(dropFruitCount)+"timline");
-
 //			speed += falling / 3000;
-			strategy.updateSpeed();
-
 			root.getChildren().add((Node) (drop.get(drop.size() - 1)));
+			if((strategy instanceof Arcade)&&(controller.getObjectList().get(controller.getListCount() - 1) instanceof Boom))
+			{   drop.remove(fruitiv);
+				controller.getObjectList().remove(controller.getListCount() - 1);
+				root.getChildren().remove((Node) (drop.get(drop.size() - 1)));
+			}
+			strategy.updateSpeed();
+		
+			
            timing++;
 		//	root.getChildren().remove(lblscore2);
 		}));
@@ -391,6 +397,9 @@ public class GameGui  {
 
 	public void setStrategy(IGameStrategy strategy) {
 		this.strategy = strategy;
+	}
+	public void setNewgame(NewGame newgame) {
+		this.newgame = newgame;
 	}
 	
 }

@@ -17,10 +17,13 @@ public  class Main extends Application{
 		mainmenu.setNewGame(newGame);
 		newGame.SetMainMenu(mainmenu);
 		newGame.SetArcadeGame(classicGame);
+		newGame.setGameGui(gamegui);
 		classicGame.SetNewGame(newGame);
 		
 		gamegui.setClassicMode(classicGame);
+	     gamegui.setNewgame(newGame);
 		classicGame.setGamegui(gamegui);
+		
 		
 		mainmenu.PrepareScene();
 		

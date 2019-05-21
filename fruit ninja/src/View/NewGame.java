@@ -1,4 +1,5 @@
 package View;
+import Model.Arcade;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -11,6 +12,7 @@ public class NewGame {
 	MainMenu mainmenu;
 	ClassicMode arcadeGame;
 	MediaPlayer intro;
+	GameGui gamegui;
 	public NewGame(Stage stage) {
 		this.stage=stage;
 	}
@@ -47,6 +49,10 @@ public class NewGame {
 		  translate2.play();
 	    
         bt2.setOnAction(m->{
+			gamegui.setStrategy(new Arcade());
+        	gamegui.prepareScene();
+        	stage.setScene(gamegui.getScene());
+        	
 			
 		});
         
@@ -93,6 +99,9 @@ public class NewGame {
 
 	public void setIntro(MediaPlayer intro) {
 		this.intro = intro;
+	}
+	public void setGameGui(GameGui gamegui) {
+		this.gamegui = gamegui;
 	}
 	
 }
