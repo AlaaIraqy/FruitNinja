@@ -16,6 +16,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,6 +60,9 @@ public class GameGui  {
 	ImageView heartiv2;
 	ImageView Score;
 	ImageView time;
+	
+	Button pause;
+	fxxxbutton resume;
 	long timeElapsed=0;
 	// int missed = 0;
 	Timeline timeline;
@@ -67,6 +71,7 @@ public class GameGui  {
     }
 	GameObject fruit;
 	Gameoversubscene gameover = new Gameoversubscene();
+	PauseSubscene pausesubs = new PauseSubscene();
 	 Media intro = new Media(new File("intro (2).mp3").toURI().toString()); 
 	 MediaPlayer introPlayer = new MediaPlayer(intro); 
 	 Media GameOver = new Media(new File("GameOver.mp3").toURI().toString()); 
@@ -76,8 +81,9 @@ public class GameGui  {
 	 Media boom = new Media(new File("boom.mp3").toURI().toString()); 
 	 MediaPlayer boomPlayer = new MediaPlayer(boom); 
 	GameActions controller = ControllerFruit.getInstance();
-	long start = System.currentTimeMillis();
+	long start;
 	public void prepareScene()  {
+	start = System.currentTimeMillis();
 		score=new Text("0");
 		score.setFill(Color.ORANGE);
 		score.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
@@ -121,6 +127,15 @@ public class GameGui  {
 		swordiv = new ImageView(sword);
 		swordiv.setFitHeight(160);
 		swordiv.setFitWidth(100);
+		
+		pause = new Button("");
+		resume = new fxxxbutton("resume");
+		ImageView pauseiv = new ImageView(new Image("pause.png"));
+		pauseiv.setFitHeight(40);
+		pauseiv.setFitWidth(40);
+		pause.setLayoutX(30);
+		pause.setLayoutY(500);
+		pause.setGraphic(pauseiv);
 //		lblscore = new Label("Score: 0");
 //		lblscore.setFont(new Font("Arial", 40));
 //		lblscore.setLayoutX(10);
@@ -172,7 +187,7 @@ public class GameGui  {
 		timer.start();
 		drop.clear();
 
-		root.getChildren().addAll(swordiv, score,lbltimer);
+		root.getChildren().addAll(swordiv, score,lbltimer,pause);
 
 	    scene = new Scene(root, 1000, 600);
 
@@ -184,7 +199,24 @@ public class GameGui  {
 			mouseY = e.getY();
 
 		});
-
+		
+		pause.setOnAction(e->{
+			int i =0;
+			while(i<drop.size()) {
+			root.getChildren().remove(drop.get(i));
+			i++;
+			}		drop.clear();
+			controller.getObjectList().clear();
+			pausesubs.moveSubscene();
+			timeline.pause();
+			
+			
+			
+		});
+       resume.setOnAction(e->{
+    	   timeline.play();
+    	   
+       });
 	}
 
 	public int rand(int min, int max) {

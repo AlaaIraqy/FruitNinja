@@ -7,11 +7,12 @@ public  class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		   
+		primaryStage.setTitle("Fruit Ninja");   
 		MainMenu mainmenu = new MainMenu(primaryStage);
 		NewGame newGame = new NewGame(primaryStage);
 		ClassicMode classicGame = new ClassicMode(primaryStage);
 		GameGui gamegui = new GameGui(primaryStage);
+		
 		
 		mainmenu.setNewGame(newGame);
 		newGame.SetMainMenu(mainmenu);
