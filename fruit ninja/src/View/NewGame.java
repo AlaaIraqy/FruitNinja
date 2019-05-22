@@ -52,7 +52,7 @@ public class NewGame {
 			gamegui.setStrategy(new Arcade());
         	gamegui.prepareScene();
         	stage.setScene(gamegui.getScene());
-        	
+        	intro.stop();
 			
 		});
         

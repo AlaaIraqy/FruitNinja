@@ -193,6 +193,8 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 				controller.ResetGame();
 				main.start(stage);
 				GameOverPlayer.stop();
+				introPlayer.stop();
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
