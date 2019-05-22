@@ -323,6 +323,8 @@ back.setStyle("-fx-font: 20 arial;-fx-font-weight: bold;");
 				GameOverPlayer.play();
 				gameover.moveSubscene();
 				root.getChildren().remove(swrd);
+				pause.setDisable(true);
+				resume.setDisable(true);
 //				swrd.setPositionX(0);
 //				swrd.setPositionY(0);
 				scene.setCursor(Cursor.DEFAULT);
